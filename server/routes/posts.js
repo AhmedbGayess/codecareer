@@ -44,4 +44,28 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Like/Unlike post
+router.patch("/like/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).send("Post not found");
+    }
+
+    const liked = post.likes.find((like) => like.id.toString() === req.user.id);
+
+    if (liked) {
+      const newLikes = post.likes.filter(
+        (like) => like.id.toString() !== req.user.id
+      );
+      post.likes = newLikes;
+    } else {
+      post.likes.push(req.user.id);
+    }
+    await post.save();
+    res.send(post);
+  } catch (err) {}
+});
+
 module.exports = router;
