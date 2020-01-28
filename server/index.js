@@ -1,9 +1,14 @@
 const express = require("express");
 const connectDB = require("./db/mongoose");
 
-const app = express();
+const users = require("./routes/users");
 
+const app = express();
 connectDB();
+
+app.use(express.json());
+
+app.use("/api/users", users);
 
 const PORT = process.env.PORT || 5000;
 

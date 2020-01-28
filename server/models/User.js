@@ -4,11 +4,14 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      minlength: 4,
+      maxlength: 280
     },
     email: {
       type: String,
       required: true,
+      unique: true,
       validate(email) {
         const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if (!emailRegex.test(email)) {
@@ -18,9 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-      minlength: 8,
-      maxlength: 30
+      required: true
     },
     role: {
       type: String,
