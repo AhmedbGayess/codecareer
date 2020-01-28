@@ -1,0 +1,42 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Ahmed\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add express mongoose validator jsowebtoken bcryptjs multer jimp
+
+PATH: 
+  C:\Users\Ahmed\bin;C:\Users\Ahmed\vendor\bin;C:\Users\Ahmed\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Ahmed\vendor\conemu-maximus5;C:\Users\Ahmed\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\MongoDB\Server\4.0\bin;C:\Program Files (x86)\Nodist\bin;C:\Users\Ahmed\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\PuTTY\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Ahmed\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\Ahmed\AppData\Local\Android\sdk\platform-tools;C:\Users\Ahmed\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\Ahmed\AppData\Local\Microsoft\WindowsApps;C:\Users\Ahmed\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ahmed\AppData\Roaming\npm;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Ahmed
+
+Yarn version: 
+  1.19.2
+
+Node version: 
+  10.16.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/jsowebtoken: Not found
+      at Request.params.callback [as _callback] (C:\Users\Ahmed\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66927:18)
+      at Request.self.callback (C:\Users\Ahmed\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140586:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (C:\Users\Ahmed\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141558:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (C:\Users\Ahmed\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141480:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1145:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+    "name": "server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Ahmed Ben Gayess",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
