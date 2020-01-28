@@ -56,9 +56,19 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   website: {
-    type: String
+    type: String,
+    validate(website) {
+      const websiteRegex = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
+      if (!websiteRegex.test(website)) {
+        throw new Error("Invalid website URL");
+      }
+    }
   },
   profilePicture: {
     type: String
   }
 });
+
+const Profile = mongoose.model("profiles", ProfileSchema);
+
+module.exports = Profile;
