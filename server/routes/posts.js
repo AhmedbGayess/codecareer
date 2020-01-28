@@ -21,7 +21,7 @@ router.post("/", auth, async (req, res) => {
       user: req.user.id,
       name: profile.user.name,
       profilePicture: profile.profilePicture,
-      body: req.body.body
+      text: req.body.text
     });
 
     await post.save();
@@ -63,6 +63,42 @@ router.patch("/like/:id", auth, async (req, res) => {
     } else {
       post.likes.push(req.user.id);
     }
+    await post.save();
+    res.send(post);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Add comment
+router.post("/comment/:id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
+    })
+      .populate("user", ["name"])
+      .select(
+        "-skills -experience -about -education -github -location -website"
+      );
+
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).send("No post found");
+    }
+
+    if (!req.body.text) {
+      return res.status(400).send("Comment text is required");
+    }
+
+    const comment = {
+      user: req.user.id,
+      name: profile.user.name,
+      profilePicture: profile.profilePicture,
+      text: req.body.text
+    };
+
+    post.comments.unshift(comment);
     await post.save();
     res.send(post);
   } catch (err) {
