@@ -54,7 +54,6 @@ router.delete("/:id", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
   try {
     const posts = await Post.find()
-      .sort({ date: -1 })
       .limit(10)
       .skip(parseInt(req.params.skip));
     res.send(posts);
@@ -63,7 +62,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// Like/Unlike post
+// Like/ Unlike post
 router.patch("/like/:id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);

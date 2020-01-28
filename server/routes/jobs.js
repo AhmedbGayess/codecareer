@@ -30,7 +30,6 @@ router.post("/", auth, async (req, res) => {
       description,
       skills
     });
-    console.log(profile);
 
     await job.save();
     res.send(job);
@@ -77,7 +76,34 @@ router.post("/apply/:id", auth, async (req, res) => {
 
     await job.save();
     res.send(job);
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get all jobs
+router.get("/", auth, async (req, res) => {
+  try {
+    const jobs = await Job.find()
+      .limit(10)
+      .skip(parseInt(req.params.skip));
+    res.send(jobs);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get job by id
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const job = await Job.findById(req.params.id);
+    if (!job) {
+      return res.status(404).send("No job found");
+    }
+    res.send(job);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
 
 module.exports = router;
