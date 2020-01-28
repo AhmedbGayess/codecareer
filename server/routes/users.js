@@ -33,4 +33,40 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Login
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).send("Wrong email or password");
+    }
+
+    const isUser = await bcrypt.compare(password, user.password);
+
+    if (!isUser) {
+      return res.status(404).send("Wrong email or password");
+    }
+
+    const payload = {
+      id: user._id,
+      role: user.role
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 10800 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 module.exports = router;
