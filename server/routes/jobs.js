@@ -86,7 +86,8 @@ router.get("/", auth, async (req, res) => {
   try {
     const jobs = await Job.find()
       .limit(10)
-      .skip(parseInt(req.params.skip));
+      .skip(parseInt(req.params.skip))
+      .select("-applicants");
     res.send(jobs);
   } catch (err) {
     res.status(500).send(err.message);
@@ -101,6 +102,33 @@ router.get("/:id", auth, async (req, res) => {
       return res.status(404).send("No job found");
     }
     res.send(job);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Edit job
+router.patch("/:id", auth, async (req, res) => {
+  try {
+    const job = await Job.findOneAndUpdate(
+      { _id: req.params.id, user: req.user.id },
+      { $set: req.body },
+      { new: true }
+    );
+    if (!job) {
+      return res.status(400).send();
+    }
+    res.send(job);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Delete job
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    await Job.findOneAndRemove({ _id: req.params.id, user: req.user.id });
+    res.send("Job deleted");
   } catch (err) {
     res.status(500).send(err.message);
   }
