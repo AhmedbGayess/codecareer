@@ -65,7 +65,8 @@ const ProfileSchema = new mongoose.Schema({
     }
   },
   profilePicture: {
-    type: String
+    type: String,
+    default: ""
   }
 });
 
