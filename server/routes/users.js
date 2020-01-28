@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
+const auth = require("../middleware/auth");
 const User = require("../models/User");
 
 // Register user
@@ -64,6 +65,16 @@ router.post("/login", async (req, res) => {
         res.json({ token });
       }
     );
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get own user
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.send(user);
   } catch (err) {
     res.status(500).send(err.message);
   }
