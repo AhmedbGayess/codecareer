@@ -31,6 +31,26 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+// Delete post
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).send("Post not found");
+    }
+
+    if (post.user.toString() !== req.user.id) {
+      return res.status(401).send("Unauthorized");
+    }
+
+    await post.remove();
+    res.send("Post removed");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // Get posts
 router.get("/", auth, async (req, res) => {
   try {
