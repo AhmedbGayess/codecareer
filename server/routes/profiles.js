@@ -6,7 +6,7 @@ const auth = require("../middleware/auth");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-// Create profile
+// Create and update profile
 router.post("/", auth, async (req, res) => {
   const {
     about,
@@ -43,7 +43,7 @@ router.post("/", auth, async (req, res) => {
       profileObject.github = github;
     }
   }
-  console.log(profileObject);
+
   try {
     let profile = await Profile.findOne({ user: req.user.id });
 
