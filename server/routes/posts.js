@@ -65,7 +65,9 @@ router.patch("/like/:id", auth, async (req, res) => {
     }
     await post.save();
     res.send(post);
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
 
 module.exports = router;
