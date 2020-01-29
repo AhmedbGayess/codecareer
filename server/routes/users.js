@@ -80,4 +80,49 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Edit user
+router.patch("/", auth, async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const updates = {};
+
+    if (name) {
+      updates.name = name;
+    }
+
+    if (email) {
+      updates.email = email;
+    }
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const newPassword = await bcrypt.hash(password, salt);
+      updates.password = newPassword;
+    }
+
+    user = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: updates },
+      { new: true }
+    );
+
+    const payload = {
+      id: user._id,
+      role: user.role
+    };
+
+    jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn: 10800 },
+      (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      }
+    );
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 module.exports = router;
