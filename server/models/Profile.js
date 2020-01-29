@@ -5,6 +5,10 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users"
   },
+  name: {
+    type: String,
+    required: true
+  },
   about: {
     type: String,
     required: true

@@ -6,6 +6,7 @@ const router = express.Router();
 
 const auth = require("../middleware/auth");
 const User = require("../models/User");
+const Profile = require("../models/Profile");
 
 // Register user
 router.post("/", async (req, res) => {
@@ -17,7 +18,8 @@ router.post("/", async (req, res) => {
 
     const payload = {
       id: user._id,
-      role: user.role
+      role: user.role,
+      name: user.name
     };
 
     jwt.sign(
@@ -53,7 +55,8 @@ router.post("/login", async (req, res) => {
 
     const payload = {
       id: user._id,
-      role: user.role
+      role: user.role,
+      name: user.name
     };
 
     jwt.sign(
@@ -100,11 +103,13 @@ router.patch("/", auth, async (req, res) => {
       updates.password = newPassword;
     }
 
-    user = await User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       req.user.id,
       { $set: updates },
       { new: true }
     );
+
+    await Profile.findOneAndUpdate({ user: req.user.id }, { $set: { name } });
 
     const payload = {
       id: user._id,

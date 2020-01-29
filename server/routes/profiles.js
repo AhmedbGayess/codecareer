@@ -65,14 +65,33 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// Get all profiles
+// Get or search all profiles
 router.get("/", auth, async (req, res) => {
+  const searchQuery = req.query.search.trim().toLowerCase() || "";
   try {
-    const profiles = await Profile.find()
-      .populate("user", ["name", "email", "role"])
+    const profiles = await Profile.find({
+      $or: [
+        {
+          skills: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          about: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          location: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          name: new RegExp(`.*${searchQuery}.*`, "i")
+        }
+      ]
+    })
+      .populate("user", ["email", "role"])
+      .select("-experience -about -education -github -website")
       .limit(10)
       .skip(parseInt(req.query.skip));
-
+    if (!profiles) {
+      return res.status(404).send("No profiles found");
+    }
     res.send(profiles);
   } catch (err) {
     res.status(500).send(err.message);
@@ -84,7 +103,7 @@ router.get("/my-profile", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    }).populate("user", ["name", "email", "role"]);
+    }).populate("user", ["email", "role"]);
 
     if (!profile) {
       return res.status(404).send("You still do not have a profile");
@@ -101,7 +120,7 @@ router.get("/user/:id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.id
-    }).populate("user", ["name", "email", "role"]);
+    }).populate("user", ["email", "role"]);
 
     if (!profile) {
       return res.status(404).send("Profile not found");
