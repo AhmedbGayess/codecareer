@@ -6,7 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
-    "server": "env-cmd nodemon index.js"
+    "server": "env-cmd nodemon index.js",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
