@@ -1,0 +1,34 @@
+.login {
+  position: relative;
+  background-image: url("../../images/developers.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+
+  &__container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 90%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__intro {
+    color: #fff;
+    width: 40%;
+  }
+
+  &__title {
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  label {
+    color: #fff !important;
+  }
+}

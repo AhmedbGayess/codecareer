@@ -1,0 +1,33 @@
+.input {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  &-label {
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom: 4px;
+  }
+
+  &-field {
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+
+    &:focus {
+      border-color: #303069;
+    }
+  }
+
+  &-error {
+    color: #fa685b;
+    margin-top: 4px;
+    line-height: 21px;
+  }
+}
