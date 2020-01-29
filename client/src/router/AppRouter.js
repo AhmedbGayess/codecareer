@@ -9,6 +9,7 @@ const AppRouter = () => (
     <Navbar />
     <Switch>
       <Route path="/" exact component={Login} />
+      <Route path="/register" exact component={Signup} />
     </Switch>
   </Router>
 );
