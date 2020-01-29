@@ -67,7 +67,9 @@ router.post("/", auth, async (req, res) => {
 
 // Get or search all profiles
 router.get("/", auth, async (req, res) => {
-  const searchQuery = req.query.search.trim().toLowerCase() || "";
+  req.query.search = req.query.search ? req.query.search : "";
+  const searchQuery = req.query.search.trim().toLowerCase();
+
   try {
     const profiles = await Profile.find({
       $or: [

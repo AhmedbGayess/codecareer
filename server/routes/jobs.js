@@ -81,13 +81,34 @@ router.post("/apply/:id", auth, async (req, res) => {
   }
 });
 
-// Get all jobs
+// Get or search all jobs
 router.get("/", auth, async (req, res) => {
+  req.query.search = req.query.search ? req.query.search : "";
+  const searchQuery = req.query.search.trim().toLowerCase();
+
   try {
-    const jobs = await Job.find()
+    const jobs = await Job.find({
+      $or: [
+        {
+          skills: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          company: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          title: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          description: new RegExp(`.*${searchQuery}.*`, "i")
+        },
+        {
+          location: new RegExp(`.*${searchQuery}.*`, "i")
+        }
+      ]
+    })
+      .select("-applicants")
       .limit(10)
-      .skip(parseInt(req.params.skip))
-      .select("-applicants");
+      .skip(parseInt(req.params.skip));
     res.send(jobs);
   } catch (err) {
     res.status(500).send(err.message);
