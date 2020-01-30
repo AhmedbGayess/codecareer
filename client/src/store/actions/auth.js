@@ -9,7 +9,7 @@ export const login = (userInfo, history) => async (dispatch) => {
     localStorage.setItem("authToken", data.token);
     const decoded = jwt_decode(data.token);
     setAuthToken(decoded);
-    dispatch(setCurrrentUser(decoded));
+    dispatch(setCurrentUser(decoded));
     dispatch(resetAuthError());
     history.push("/azerty");
   } catch (err) {
@@ -26,7 +26,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     localStorage.setItem("authToken", data.token);
     const decoded = jwt_decode(data.token);
     setAuthToken(decoded);
-    dispatch(setCurrrentUser(decoded));
+    dispatch(setCurrentUser(decoded));
     dispatch(resetAuthError());
     history.push("/azerty");
   } catch (err) {
@@ -47,11 +47,11 @@ export const resetAuthError = () => ({
 export const logout = (history) => (dispatch) => {
   localStorage.removeItem("token");
   setAuthToken(null);
-  dispatch(setCurrrentUser({}));
+  dispatch(setCurrentUser({}));
   history.push("/");
 };
 
-const setCurrrentUser = (decoded) => ({
+export const setCurrentUser = (decoded) => ({
   type: SET_CURRENT_USER,
   payload: decoded
 });
