@@ -7,7 +7,8 @@ import "./Navbar.scss";
 
 const Navbar = ({ history, isAuthenticated, logout }) => {
   const logoutUser = () => {
-    logout(history);
+    logout();
+    history.push("/");
   };
 
   return (

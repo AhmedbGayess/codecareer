@@ -1,0 +1,14 @@
+.education {
+  &-list {
+    border-top: 1px solid #ccc;
+    margin-top: 2rem;
+    padding-top: 1rem;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    &__title {
+    }
+  }
+}

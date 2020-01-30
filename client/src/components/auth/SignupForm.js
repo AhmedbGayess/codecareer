@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { registerUser, resetAuthError } from "../../store/actions/auth";
-import TextInput from "../common/TextInput";
+import FormInput from "../common/FormInput";
 import SelectInput from "../common/SelectInput";
 import "./SignupForm.scss";
 
@@ -59,7 +59,7 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
 
   return (
     <form className="signup-form" onSubmit={onSubmit}>
-      <TextInput
+      <FormInput
         name="name"
         label="Name"
         placeholder="Please enter your name"
@@ -67,7 +67,7 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
         onChange={setName}
         error={nameError}
       />
-      <TextInput
+      <FormInput
         name="email"
         type="email"
         label="Email"
@@ -76,7 +76,7 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
         onChange={setEmail}
         error={authError || emailError}
       />
-      <TextInput
+      <FormInput
         name="password"
         type="password"
         label="Password"

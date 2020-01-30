@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./TextInput.scss";
+import "./FormInput.scss";
 
-const TextInput = ({
+const FormInput = ({
   name,
   label,
   placeholder,
@@ -30,7 +30,7 @@ const TextInput = ({
   );
 };
 
-TextInput.propTypes = {
+FormInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -39,4 +39,4 @@ TextInput.propTypes = {
   placeholder: PropTypes.string
 };
 
-export default TextInput;
+export default FormInput;

@@ -44,11 +44,10 @@ export const resetAuthError = () => ({
   payload: ""
 });
 
-export const logout = (history) => (dispatch) => {
-  localStorage.removeItem("token");
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("authToken");
   setAuthToken(null);
   dispatch(setCurrentUser({}));
-  history.push("/");
 };
 
 export const setCurrentUser = (decoded) => ({

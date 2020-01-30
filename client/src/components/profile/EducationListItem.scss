@@ -1,0 +1,21 @@
+.education-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__school {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  &__degree {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}

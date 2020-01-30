@@ -57,11 +57,33 @@ ul {
   &--primary {
     color: #fff;
     background: #303069;
+    border: 1px solid #303030;
+
+    &:hover {
+      color: #303069;
+      background: #fff;
+    }
   }
 
   &--secondary {
     color: #303069;
     background: #fff;
     border: 1px solid #303030;
+
+    &:hover {
+      color: #fff;
+      background: #303069;
+    }
+  }
+
+  &--delete {
+    background: red;
+    color: #fff;
+    border: 1px solid red;
+
+    &:hover {
+      background: #fff;
+      color: red;
+    }
   }
 }

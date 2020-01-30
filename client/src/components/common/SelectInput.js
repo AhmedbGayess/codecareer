@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./TextInput.scss";
+import "./FormInput.scss";
 
 const SelectInput = ({ name, label, choices, error, onChange, value }) => {
   const options = choices.map((option) => (

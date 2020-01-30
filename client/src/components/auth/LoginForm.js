@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login, resetAuthError } from "../../store/actions/auth";
-import TextInput from "../common/TextInput";
+import FormInput from "../common/FormInput";
 import "./LoginForm.scss";
 
 const LoginForm = ({ login, history, authError, resetAuthError }) => {
@@ -47,7 +47,7 @@ const LoginForm = ({ login, history, authError, resetAuthError }) => {
 
   return (
     <form className="login-form" onSubmit={onSubmit}>
-      <TextInput
+      <FormInput
         name="email"
         label="Email"
         placeholder="Please enter your email address"
@@ -55,7 +55,7 @@ const LoginForm = ({ login, history, authError, resetAuthError }) => {
         onChange={setEmail}
         error={emailError}
       />
-      <TextInput
+      <FormInput
         name="password"
         type="password"
         label="Password"
