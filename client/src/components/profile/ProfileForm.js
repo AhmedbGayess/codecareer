@@ -11,7 +11,8 @@ const ProfileForm = ({
   setGithub,
   website,
   setWebsite,
-  onImageChange
+  aboutError,
+  locationError
 }) => {
   return (
     <form className="profile-form">
@@ -21,6 +22,7 @@ const ProfileForm = ({
         placeholder="Tell us a bit about you"
         value={about}
         onChange={setAbout}
+        error={aboutError}
       />
       <FormInput
         name="location"
@@ -28,6 +30,7 @@ const ProfileForm = ({
         placeholder="Your current location"
         value={location}
         onChange={setLocation}
+        error={locationError}
       />
       <FormInput
         name="github"

@@ -6,11 +6,11 @@ import "./EducationForm.scss";
 
 const ExperienceForm = ({ addExperience, toggleExperienceForm }) => {
   const [company, setCompany] = useState("");
-  const [title, setTitle] = useState("");
+  const [position, setPosition] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [companyError, setCompanyError] = useState("");
-  const [titleError, setTitleError] = useState("");
+  const [positionError, setPositionError] = useState("");
   const [fromError, setFromError] = useState("");
 
   const wrapperRef = useRef(null);
@@ -49,10 +49,10 @@ const ExperienceForm = ({ addExperience, toggleExperienceForm }) => {
       setCompanyError("");
     }
 
-    if (title === "") {
-      setTitleError("Please enter the title of your position");
+    if (position === "") {
+      setPositionError("Please enter your position in that company");
     } else {
-      setTitleError("");
+      setPositionError("");
     }
 
     if (from === "") {
@@ -70,9 +70,9 @@ const ExperienceForm = ({ addExperience, toggleExperienceForm }) => {
       return;
     }
 
-    addExperience({ id: uuidv4(), company, title, from, to });
+    addExperience({ id: uuidv4(), company, position, from, to });
     setCompany("");
-    setTitle("");
+    setPosition("");
     setFrom("");
     setTo("");
     toggleExperienceForm();
@@ -90,12 +90,12 @@ const ExperienceForm = ({ addExperience, toggleExperienceForm }) => {
           error={companyError}
         />
         <FormInput
-          name="title"
-          label="Title"
-          placeholder="Your job's title"
-          value={title}
-          onChange={setTitle}
-          error={titleError}
+          name="position"
+          label="Position"
+          placeholder="Your position in the company"
+          value={position}
+          onChange={setPosition}
+          error={positionError}
         />
         <FormInput
           name="from"

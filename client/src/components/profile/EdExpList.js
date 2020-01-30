@@ -8,7 +8,7 @@ const EdExpList = ({ edExp, toggleForm, deleteEdExp, title }) => {
     <EdExpListItem
       key={el.id}
       establishment={el.school || el.company}
-      title={el.degree || el.title}
+      title={el.degree || el.position}
       from={el.from}
       to={el.to}
       id={el.id}

@@ -1,2 +1,5 @@
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
+export const SET_PROFILE = "SET_PROFILE";
+export const SET_PROFILES = "SET_PROFILES";
+export const SET_PROFILE_LOADING = "SET_PROFILE_LOADING";
