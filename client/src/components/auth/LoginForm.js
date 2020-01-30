@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../store/actions/auth";
 import TextInput from "../common/TextInput";
 import "./LoginForm.scss";
 
-const LoginForm = () => {
+const LoginForm = ({ login, history }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -13,9 +16,14 @@ const LoginForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    login(formData, history);
+  };
+
   const { email, password } = formData;
   return (
-    <form className="login-form">
+    <form className="login-form" onSubmit={onSubmit}>
       <TextInput
         name="email"
         type="email"
@@ -43,4 +51,9 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+export default connect(null, { login })(LoginForm);

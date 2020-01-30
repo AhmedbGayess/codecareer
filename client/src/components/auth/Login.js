@@ -2,7 +2,7 @@ import React from "react";
 import "./Login.scss";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
+const Login = ({ history }) => {
   return (
     <div className="login">
       <div className="container">
@@ -15,7 +15,7 @@ const Login = () => {
               at lacinia arcu turpis nec odio.
             </p>
           </div>
-          <LoginForm />
+          <LoginForm history={history} />
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import Signup from "../components/auth/Signup";
 
 const AppRouter = () => (
   <Router>
-    <Navbar />
+    <Route component={Navbar} />
     <Switch>
       <Route path="/" exact component={Login} />
       <Route path="/register" exact component={Signup} />

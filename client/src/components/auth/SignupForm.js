@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { registerUser } from "../../store/actions/auth";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 import "./SignupForm.scss";
 
-const SignupForm = () => {
+const SignupForm = ({ history, registerUser }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,9 +19,14 @@ const SignupForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    registerUser(formData, history);
+  };
+
   const { name, email, password, role } = formData;
   return (
-    <form className="signup-form">
+    <form className="signup-form" onSubmit={onSubmit}>
       <TextInput
         name="name"
         label="Name"
@@ -60,4 +68,9 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+SignupForm.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
+};
+
+export default connect(null, { registerUser })(SignupForm);
