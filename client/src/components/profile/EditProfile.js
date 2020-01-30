@@ -4,13 +4,15 @@ import ExperienceForm from "./ExperienceForm";
 import ProfileForm from "./ProfileForm";
 import EdExpList from "./EdExpList";
 import "./EditProfile.scss";
+import axios from "axios";
+import ProfileImageInput from "./ProfileImageInput";
 
 const EditProfile = (props) => {
   const [about, setAbout] = useState("");
   const [location, setLocation] = useState("");
   const [experience, setExperience] = useState([]);
   const [education, setEducation] = useState([]);
-  const [skills, setSkills] = useState([]);
+  // const [skills, setSkills] = useState([]);
   const [github, setGithub] = useState("");
   const [website, setWebsite] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
@@ -41,11 +43,28 @@ const EditProfile = (props) => {
     setExperienceFormVisible(!isExperienceFormVisible);
   };
 
+  const uploadImage = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+
+    const { data } = await axios.post("/api/images", formData, config);
+    setProfilePicture(data.image);
+  };
+
   return (
     <div className="edit-profile">
       <div className="container">
         <h1 className="edit-profile__title">PROFILE</h1>
         <>
+          {profilePicture && (
+            <img src={`/images/${profilePicture}`} alt="profile" />
+          )}
+          {!profilePicture && <ProfileImageInput onChange={uploadImage} />}
           <ProfileForm
             about={about}
             setAbout={setAbout}
@@ -55,6 +74,7 @@ const EditProfile = (props) => {
             setGithub={setGithub}
             website={website}
             setWebsite={setWebsite}
+            onImageChange={uploadImage}
           />
           <EdExpList
             edExp={education}

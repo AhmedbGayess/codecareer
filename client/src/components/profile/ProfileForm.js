@@ -10,7 +10,8 @@ const ProfileForm = ({
   github,
   setGithub,
   website,
-  setWebsite
+  setWebsite,
+  onImageChange
 }) => {
   return (
     <form className="profile-form">
@@ -54,7 +55,7 @@ ProfileForm.propTypes = {
   setAbout: PropTypes.func.isRequired,
   setLocation: PropTypes.func.isRequired,
   setGithub: PropTypes.func.isRequired,
-  setWebsite: PropTypes.func.isRequired,
+  setWebsite: PropTypes.func.isRequired
 };
 
 export default ProfileForm;
