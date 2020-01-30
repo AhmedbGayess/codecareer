@@ -6,6 +6,7 @@ import EdExpList from "./EdExpList";
 import "./EditProfile.scss";
 import axios from "axios";
 import ProfileImageInput from "./ProfileImageInput";
+import ProfilePicture from "./ProfilePicture";
 
 const EditProfile = (props) => {
   const [about, setAbout] = useState("");
@@ -56,13 +57,21 @@ const EditProfile = (props) => {
     setProfilePicture(data.image);
   };
 
+  const deleteImage = async () => {
+    await axios.delete(`/api/images/${profilePicture}`);
+    setProfilePicture("");
+  };
+
   return (
     <div className="edit-profile">
       <div className="container">
-        <h1 className="edit-profile__title">PROFILE</h1>
+        <h1 className="edit-profile__title">SET YOUR PROFILE</h1>
         <>
           {profilePicture && (
-            <img src={`/images/${profilePicture}`} alt="profile" />
+            <ProfilePicture
+              profilePicture={profilePicture}
+              deleteImage={deleteImage}
+            />
           )}
           {!profilePicture && <ProfileImageInput onChange={uploadImage} />}
           <ProfileForm

@@ -1,0 +1,16 @@
+.edit-profile {
+  margin: 3rem 0;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__image-container {
+    text-align: center;
+  }
+
+  &__image {
+    display: block;
+    margin: 1rem auto;
+  }
+}
