@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { SET_CURRENT_USER } from "../types";
+import { SET_CURRENT_USER, SET_AUTH_ERROR } from "../types";
 import setAuthToken from "../../utils/setAuthToken";
 
 export const login = (userInfo, history) => async (dispatch) => {
@@ -10,9 +10,13 @@ export const login = (userInfo, history) => async (dispatch) => {
     const decoded = jwt_decode(data.token);
     setAuthToken(decoded);
     dispatch(setCurrrentUser(decoded));
+    dispatch(resetAuthError());
     history.push("/azerty");
   } catch (err) {
-    console.log(err);
+    dispatch({
+      type: SET_AUTH_ERROR,
+      payload: "Incorrect email or password"
+    });
   }
 };
 
@@ -23,11 +27,22 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     const decoded = jwt_decode(data.token);
     setAuthToken(decoded);
     dispatch(setCurrrentUser(decoded));
+    dispatch(resetAuthError());
     history.push("/azerty");
   } catch (err) {
-    console.log(err);
+    if (err.response.data.includes("duplicate key")) {
+      dispatch({
+        type: SET_AUTH_ERROR,
+        payload: "Email already used"
+      });
+    }
   }
 };
+
+export const resetAuthError = () => ({
+  type: SET_AUTH_ERROR,
+  payload: ""
+});
 
 export const logout = (history) => (dispatch) => {
   localStorage.removeItem("token");

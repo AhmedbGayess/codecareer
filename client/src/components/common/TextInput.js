@@ -22,7 +22,7 @@ const TextInput = ({
         name={name}
         className="input-field"
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         value={value}
       />
       {error && <p className="input-error">{error}</p>}
