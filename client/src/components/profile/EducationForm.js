@@ -23,6 +23,8 @@ const EducationForm = ({ addEducation, toggleEducationForm }) => {
       document.removeEventListener("click", handleClickOutside);
       document.removeEventListener("keydown", handleEscapePress);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClickOutside = (e) => {

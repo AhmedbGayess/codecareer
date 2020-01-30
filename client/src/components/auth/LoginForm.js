@@ -14,6 +14,7 @@ const LoginForm = ({ login, history, authError, resetAuthError }) => {
 
   useEffect(() => {
     resetAuthError();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleValidation = () => {
