@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
 import ProfileForm from "./ProfileForm";
-import EducationList from "./EducationList";
+import EdExpList from "./EdExpList";
 import "./EditProfile.scss";
 
 const EditProfile = (props) => {
@@ -15,6 +15,7 @@ const EditProfile = (props) => {
   const [website, setWebsite] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [isEducationFormVisible, setEducationFormVisible] = useState(false);
+  const [isExperienceFormVisible, setExperienceFormVisible] = useState(false);
 
   const addEducation = (ed) => {
     setEducation([ed, ...education]);
@@ -24,12 +25,20 @@ const EditProfile = (props) => {
     setEducation(education.filter((ed) => ed.id !== id));
   };
 
+  const toggleEducationForm = () => {
+    setEducationFormVisible(!isEducationFormVisible);
+  };
+
   const addExperience = (exp) => {
     setExperience([exp, ...experience]);
   };
 
-  const toggleEducationForm = () => {
-    setEducationFormVisible(!isEducationFormVisible);
+  const deleteExperience = (id) => {
+    setExperience(experience.filter((exp) => exp.id !== id));
+  };
+
+  const toggleExperienceForm = () => {
+    setExperienceFormVisible(!isExperienceFormVisible);
   };
 
   return (
@@ -47,10 +56,17 @@ const EditProfile = (props) => {
             website={website}
             setWebsite={setWebsite}
           />
-          <EducationList
-            education={education}
-            toggleEducationForm={toggleEducationForm}
-            deleteEducation={deleteEducation}
+          <EdExpList
+            edExp={education}
+            toggleForm={toggleEducationForm}
+            deleteEdExp={deleteEducation}
+            title="Education"
+          />
+          <EdExpList
+            edExp={experience}
+            toggleForm={toggleExperienceForm}
+            deleteEdExp={deleteExperience}
+            title="Experience"
           />
           {isEducationFormVisible && (
             <EducationForm
@@ -58,7 +74,12 @@ const EditProfile = (props) => {
               toggleEducationForm={toggleEducationForm}
             />
           )}
-          {/* <ExperienceForm addExperience={addExperience} /> */}
+          {isExperienceFormVisible && (
+            <ExperienceForm
+              addExperience={addExperience}
+              toggleExperienceForm={toggleExperienceForm}
+            />
+          )}
         </>
       </div>
     </div>

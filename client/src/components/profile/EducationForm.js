@@ -118,7 +118,8 @@ const EducationForm = ({ addEducation, toggleEducationForm }) => {
 };
 
 EducationForm.propTypes = {
-  addEducation: PropTypes.func.isRequired
+  addEducation: PropTypes.func.isRequired,
+  toggleEducationForm: PropTypes.func.isRequired
 };
 
 export default EducationForm;
