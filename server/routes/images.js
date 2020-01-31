@@ -49,7 +49,7 @@ router.post("/", auth, (req, res) => {
           if (err) throw err;
           const image = `image-${uuidv4()}.jpeg`;
           img
-            .cover(350, 280)
+            .cover(350, 350)
             .quality(90)
             .write(`./uploads/${image}`);
           fs.unlinkSync(`./uploads/${req.file.filename}`);

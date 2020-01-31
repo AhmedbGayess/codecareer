@@ -6,7 +6,7 @@ export const editProfile = (profileData, history) => async (dispatch) => {
   console.log(profileData);
   try {
     await axios.post("/api/profiles", profileData);
-    history.push("/home");
+    history.push("/me");
   } catch (err) {
     console.log(err);
   }

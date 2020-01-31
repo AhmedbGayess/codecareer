@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOwnProfile } from "../../store/actions/profiles";
 import Loader from "../common/Loader";
+import ProfileCard from "./ProfileCard";
 
 const DevProfile = ({ profile, loading, getOwnProfile }) => {
   useEffect(() => {
@@ -13,9 +14,28 @@ const DevProfile = ({ profile, loading, getOwnProfile }) => {
     return <Loader />;
   }
 
+  const {
+    name,
+    about,
+    location,
+    experience,
+    education,
+    github,
+    website,
+    skills,
+    profilePicture
+  } = profile;
+
   return (
     <div>
-      <h1>Profile</h1>
+      <div className="container">
+        <ProfileCard
+          name={name}
+          about={about}
+          location={location}
+          profilePicture={profilePicture}
+        />
+      </div>
     </div>
   );
 };
