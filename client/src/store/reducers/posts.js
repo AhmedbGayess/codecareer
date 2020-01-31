@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   post: null,
-  posts: null,
+  posts: [],
   loading: false
 };
 
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
     case SET_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        posts: [...state.posts, ...action.payload],
         loading: false
       };
     case ADD_POST:

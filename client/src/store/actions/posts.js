@@ -18,3 +18,20 @@ export const addPost = (text) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const getPosts = (skip) => async (dispatch) => {
+  dispatch(setPostLoading());
+  try {
+    const { data } = await axios.get(`/api/posts?skip=${skip}`);
+    dispatch({
+      type: SET_POSTS,
+      payload: data
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const setPostLoading = () => ({
+  type: SET_POST_LOADING
+});
