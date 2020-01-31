@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./ProfileCard.scss";
+import avatar from "../../images/avatar.png";
 
 const ProfileCard = ({
   name,
@@ -11,7 +12,8 @@ const ProfileCard = ({
   skills,
   github,
   website,
-  myProfile
+  myProfile,
+  isDeveloper
 }) => {
   const skillsList = skills.map((skill, i) =>
     i !== skills.length - 1 ? (
@@ -23,14 +25,17 @@ const ProfileCard = ({
   return (
     <div className="profile-card">
       <div className="profile-card__header"></div>
-      <img src={`/images/${profilePicture}`} className="profile-card__image" />
+      <img
+        src={profilePicture ? `/images/${profilePicture}` : avatar}
+        className="profile-card__image"
+      />
       <div className="profile-card__description">
         <div className="profile-card__text">
           <h1 className="profile-card__name">{name}</h1>
           <p className="profile-card__about">{about}</p>
           <p className="profile-card__location">{location}</p>
-          {skills && <p>Skills: {skillsList}</p>}
-          {github && (
+          {isDeveloper && skills.length > 0 && <p>Skills: {skillsList}</p>}
+          {isDeveloper && github && (
             <a
               href={`https://github.com/${github}`}
               target="_blank"

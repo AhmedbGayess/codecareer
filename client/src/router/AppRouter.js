@@ -6,7 +6,7 @@ import Navbar from "../components/layout/Navbar";
 import Login from "../components/auth/Login";
 import Signup from "../components/auth/Signup";
 import EditProfile from "../components/edit-profile/EditProfile";
-import DevProfile from "../components/profile/DevProfile";
+import Profile from "../components/profile/Profile";
 
 const AppRouter = () => (
   <Router>
@@ -15,7 +15,7 @@ const AppRouter = () => (
       <PublicRoute path="/" exact component={Login} />
       <PublicRoute path="/register" exact component={Signup} />
       <PrivateRoute path="/edit-profile" exact component={EditProfile} />
-      <PrivateRoute path="/me" exact component={DevProfile} />
+      <PrivateRoute path="/me" exact component={Profile} />
     </Switch>
   </Router>
 );

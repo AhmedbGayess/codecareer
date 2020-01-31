@@ -13,7 +13,13 @@ import ProfilePicture from "./ProfilePicture";
 import SkillForm from "./SkillForm";
 import SkillList from "./SkillList";
 
-const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
+const EditProfile = ({
+  editProfile,
+  history,
+  getOwnProfile,
+  profile,
+  role
+}) => {
   const [about, setAbout] = useState("");
   const [location, setLocation] = useState("");
   const [experience, setExperience] = useState([]);
@@ -139,6 +145,7 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
     );
   };
 
+  const isDeveloper = role === "developer";
   return (
     <div className="edit-profile">
       <div className="container">
@@ -164,31 +171,39 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
             aboutError={aboutError}
             locationError={locationError}
           />
-          <SkillForm skill={skill} setSkill={setSkill} addSkill={addSkill} />
-          <SkillList skills={skills} deleteSkill={deleteSkill} />
-          <EdExpList
-            edExp={education}
-            toggleForm={toggleEducationForm}
-            deleteEdExp={deleteEducation}
-            title="Education"
-          />
-          <EdExpList
-            edExp={experience}
-            toggleForm={toggleExperienceForm}
-            deleteEdExp={deleteExperience}
-            title="Experience"
-          />
-          {isEducationFormVisible && (
-            <EducationForm
-              addEducation={addEducation}
-              toggleEducationForm={toggleEducationForm}
-            />
-          )}
-          {isExperienceFormVisible && (
-            <ExperienceForm
-              addExperience={addExperience}
-              toggleExperienceForm={toggleExperienceForm}
-            />
+          {isDeveloper && (
+            <>
+              <SkillForm
+                skill={skill}
+                setSkill={setSkill}
+                addSkill={addSkill}
+              />
+              <SkillList skills={skills} deleteSkill={deleteSkill} />
+              <EdExpList
+                edExp={education}
+                toggleForm={toggleEducationForm}
+                deleteEdExp={deleteEducation}
+                title="Education"
+              />
+              <EdExpList
+                edExp={experience}
+                toggleForm={toggleExperienceForm}
+                deleteEdExp={deleteExperience}
+                title="Experience"
+              />
+              {isEducationFormVisible && (
+                <EducationForm
+                  addEducation={addEducation}
+                  toggleEducationForm={toggleEducationForm}
+                />
+              )}
+              {isExperienceFormVisible && (
+                <ExperienceForm
+                  addExperience={addExperience}
+                  toggleExperienceForm={toggleExperienceForm}
+                />
+              )}
+            </>
           )}
           <button
             className="btn btn--primary edit-profile__btn"
@@ -212,7 +227,8 @@ EditProfile.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profiles.profile
+  profile: state.profiles.profile,
+  role: state.auth.user.role
 });
 
 export default connect(mapStateToProps, { editProfile, getOwnProfile })(

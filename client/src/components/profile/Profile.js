@@ -6,7 +6,7 @@ import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
 import DevEdExpList from "./DevEdExpList";
 
-const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
+const Profile = ({ profile, loading, getOwnProfile, history }) => {
   useEffect(() => {
     getOwnProfile();
   }, []);
@@ -24,10 +24,12 @@ const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
     github,
     website,
     skills,
-    profilePicture
+    profilePicture,
+    user
   } = profile;
 
   const myProfile = history.location.pathname === "/me";
+  const isDeveloper = user.role === "developer";
   return (
     <div>
       <div className="container">
@@ -40,15 +42,20 @@ const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
           github={github}
           website={website}
           myProfile={myProfile}
+          isDeveloper={isDeveloper}
         />
-        {experience && <DevEdExpList list={experience} title="Experience" />}
-        {education && <DevEdExpList list={education} title="Education" />}
+        {isDeveloper && experience && (
+          <DevEdExpList list={experience} title="Experience" />
+        )}
+        {isDeveloper && education && (
+          <DevEdExpList list={education} title="Education" />
+        )}
       </div>
     </div>
   );
 };
 
-DevProfile.propTypes = {
+Profile.propTypes = {
   profile: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.instanceOf(null).isRequired
@@ -62,4 +69,4 @@ const mapStateToProps = (state) => ({
   loading: state.profiles.loading
 });
 
-export default connect(mapStateToProps, { getOwnProfile })(DevProfile);
+export default connect(mapStateToProps, { getOwnProfile })(Profile);
