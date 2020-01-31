@@ -6,7 +6,7 @@ import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
 import DevEdExpList from "./DevEdExpList";
 
-const Profile = ({ profile, loading, getOwnProfile, history }) => {
+const Profile = ({ profile, loading, getOwnProfile, history, role }) => {
   useEffect(() => {
     getOwnProfile();
   }, []);
@@ -24,12 +24,12 @@ const Profile = ({ profile, loading, getOwnProfile, history }) => {
     github,
     website,
     skills,
-    profilePicture,
-    user
+    profilePicture
   } = profile;
 
   const myProfile = history.location.pathname === "/me";
-  const isDeveloper = user.role === "developer";
+  const isDeveloper = role === "developer";
+
   return (
     <div>
       <div className="container">
@@ -66,7 +66,8 @@ Profile.propTypes = {
 
 const mapStateToProps = (state) => ({
   profile: state.profiles.profile,
-  loading: state.profiles.loading
+  loading: state.profiles.loading,
+  role: state.auth.user.role
 });
 
 export default connect(mapStateToProps, { getOwnProfile })(Profile);

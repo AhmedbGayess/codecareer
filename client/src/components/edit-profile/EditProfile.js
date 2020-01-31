@@ -170,6 +170,7 @@ const EditProfile = ({
             onImageChange={uploadImage}
             aboutError={aboutError}
             locationError={locationError}
+            isDeveloper={isDeveloper}
           />
           {isDeveloper && (
             <>
@@ -223,7 +224,8 @@ EditProfile.propTypes = {
   profile: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.instanceOf(null).isRequired
-  ])
+  ]),
+  role: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

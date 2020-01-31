@@ -12,7 +12,8 @@ const ProfileForm = ({
   website,
   setWebsite,
   aboutError,
-  locationError
+  locationError,
+  isDeveloper
 }) => {
   return (
     <form className="profile-form">
@@ -32,13 +33,15 @@ const ProfileForm = ({
         onChange={setLocation}
         error={locationError}
       />
-      <FormInput
-        name="github"
-        label="Github"
-        placeholder="Your Github username"
-        value={github}
-        onChange={setGithub}
-      />
+      {isDeveloper && (
+        <FormInput
+          name="github"
+          label="Github"
+          placeholder="Your Github username"
+          value={github}
+          onChange={setGithub}
+        />
+      )}
       <FormInput
         name="website"
         label="Website"
@@ -58,7 +61,8 @@ ProfileForm.propTypes = {
   setAbout: PropTypes.func.isRequired,
   setLocation: PropTypes.func.isRequired,
   setGithub: PropTypes.func.isRequired,
-  setWebsite: PropTypes.func.isRequired
+  setWebsite: PropTypes.func.isRequired,
+  isDeveloper: PropTypes.bool.isRequired
 };
 
 export default ProfileForm;
