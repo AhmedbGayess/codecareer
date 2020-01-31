@@ -6,12 +6,12 @@ import EdExpListItem from "./EdExpListItem";
 const EdExpList = ({ edExp, toggleForm, deleteEdExp, title }) => {
   const edExpList = edExp.map((el) => (
     <EdExpListItem
-      key={el.id}
+      key={el.id || el._id}
       establishment={el.school || el.company}
       title={el.degree || el.position}
       from={el.from}
       to={el.to}
-      id={el.id}
+      id={el.id || el._id}
       deleteEdExp={deleteEdExp}
     />
   ));

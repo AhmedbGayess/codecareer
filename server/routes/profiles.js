@@ -58,7 +58,7 @@ router.post("/", auth, async (req, res) => {
       return res.send(profile);
     }
 
-    profile = new Profile({ profileObject });
+    profile = new Profile(profileObject);
     await profile.save();
     res.send(profile);
   } catch (err) {

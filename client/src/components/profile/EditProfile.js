@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import EducationForm from "./EducationForm";
@@ -9,9 +9,9 @@ import "./EditProfile.scss";
 import axios from "axios";
 import ProfileImageInput from "./ProfileImageInput";
 import ProfilePicture from "./ProfilePicture";
-import { editProfile } from "../../store/actions/profiles";
+import { editProfile, getOwnProfile } from "../../store/actions/profiles";
 
-const EditProfile = ({ editProfile, history }) => {
+const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
   const [about, setAbout] = useState("");
   const [location, setLocation] = useState("");
   const [experience, setExperience] = useState([]);
@@ -25,12 +25,27 @@ const EditProfile = ({ editProfile, history }) => {
   const [aboutError, setAboutError] = useState("");
   const [locationError, setLocationError] = useState("");
 
+  useEffect(() => {
+    getOwnProfile();
+  }, []);
+
+  useEffect(() => {
+    setAbout(profile.about || "");
+    setLocation(profile.location || "");
+    setExperience(profile.experience || []);
+    setEducation(profile.education || []);
+    setSkills(profile.skills || []);
+    setGithub(profile.github || "");
+    setWebsite(profile.website || "");
+    setProfilePicture(profile.profilePicture || "");
+  }, [profile]);
+
   const addEducation = (ed) => {
     setEducation([ed, ...education]);
   };
 
   const deleteEducation = (id) => {
-    setEducation(education.filter((ed) => ed.id !== id));
+    setEducation(education.filter((ed) => ed.id !== id && ed._id !== id));
   };
 
   const toggleEducationForm = () => {
@@ -42,7 +57,7 @@ const EditProfile = ({ editProfile, history }) => {
   };
 
   const deleteExperience = (id) => {
-    setExperience(experience.filter((exp) => exp.id !== id));
+    setExperience(experience.filter((exp) => exp.id !== id && exp._id !== id));
   };
 
   const toggleExperienceForm = () => {
@@ -169,7 +184,15 @@ const EditProfile = ({ editProfile, history }) => {
 };
 
 EditProfile.propTypes = {
-  editProfile: PropTypes.func.isRequired
+  editProfile: PropTypes.func.isRequired,
+  getOwnProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
-export default connect(null, { editProfile })(EditProfile);
+const mapStateToProps = (state) => ({
+  profile: state.profiles.profile
+});
+
+export default connect(mapStateToProps, { editProfile, getOwnProfile })(
+  EditProfile
+);
