@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOwnProfile } from "../../store/actions/profiles";
+import Loader from "../common/Loader";
 
 const DevProfile = ({ profile, loading, getOwnProfile }) => {
   useEffect(() => {
@@ -9,7 +10,7 @@ const DevProfile = ({ profile, loading, getOwnProfile }) => {
   }, []);
 
   if (!profile || loading) {
-    return <div>loading</div>;
+    return <Loader />;
   }
 
   return (
