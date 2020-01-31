@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import AddPost from "../posts/AddPost";
-import { getPosts } from "../../store/actions/posts";
+import PropTypes from "prop-types";
+import { getPosts, addPost } from "../../store/actions/posts";
 import PostsFeed from "../posts/PostsFeed";
+import PostForm from "../posts/PostForm";
 
-const Home = ({ getPosts }) => {
+const Home = ({ getPosts, addPost }) => {
   const [skip, setSkip] = useState(0);
 
   useEffect(() => {
@@ -18,10 +19,15 @@ const Home = ({ getPosts }) => {
 
   return (
     <div className="container">
-      <AddPost />
+      <PostForm title="Create Post" submit={addPost} />
       <PostsFeed fetchPosts={fetchPosts} />
     </div>
   );
 };
 
-export default connect(null, { getPosts })(Home);
+Home.propTypes = {
+  getPosts: PropTypes.func.isRequired,
+  addPost: PropTypes.func.isRequired
+};
+
+export default connect(null, { getPosts, addPost })(Home);

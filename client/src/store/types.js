@@ -9,3 +9,4 @@ export const SET_POST = "SET_POST";
 export const SET_POSTS = "SET_POSTS";
 export const SET_POST_LOADING = "SET_POST_LOADING";
 export const LIKE_POST = "LIKE_POST";
+export const ADD_COMMENT = "ADD_COMMENT";

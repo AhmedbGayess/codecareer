@@ -4,7 +4,8 @@ import {
   SET_POST,
   SET_POSTS,
   SET_POST_LOADING,
-  LIKE_POST
+  LIKE_POST,
+  ADD_COMMENT
 } from "../types";
 
 const initialState = {
@@ -47,6 +48,14 @@ export default (state = initialState, action) => {
             ? { ...post, likes: action.payload.likes }
             : post
         )
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: [action.payload, ...state.post.comments]
+        }
       };
     default:
       return state;

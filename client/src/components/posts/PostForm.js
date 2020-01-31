@@ -1,22 +1,20 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import FormTextArea from "../common/FormTextArea";
-import "./AddPost.scss";
-import { addPost } from "../../store/actions/posts";
+import "./PostForm.scss";
 
-const AddPost = ({ addPost }) => {
+const PostForm = ({ title, submit }) => {
   const [post, setPost] = useState("");
 
   const createPost = (e) => {
     e.preventDefault();
-    addPost(post);
+    submit(post);
     setPost("");
   };
 
   return (
     <form className="post-form" onSubmit={createPost}>
-      <h2 className="post-form__title">Create Post</h2>
+      <h2 className="post-form__title">{title}</h2>
       <FormTextArea
         name="post"
         value={post}
@@ -29,8 +27,8 @@ const AddPost = ({ addPost }) => {
   );
 };
 
-AddPost.propTypes = {
-  addPost: PropTypes.func.isRequired
+PostForm.propTypes = {
+  submit: PropTypes.func.isRequired
 };
 
-export default connect(null, { addPost })(AddPost);
+export default PostForm;

@@ -44,7 +44,7 @@ const FeedPost = ({
         >
           {isLiked ? "Unlike" : "Like"}
         </button>
-        <Link to="/" className="feed-post__button">
+        <Link to={`/post/${id}`} className="feed-post__button">
           Comments
         </Link>
       </div>

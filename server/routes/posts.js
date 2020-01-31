@@ -63,12 +63,25 @@ router.get("/", auth, async (req, res) => {
 });
 
 // Get user's post
-router.get("/:id", auth, async (req, res) => {
+router.get("/user/:id", auth, async (req, res) => {
   try {
     const posts = await Post.find({ user: req.params.id })
       .limit(10)
       .skip(parseInt(req.params.skip));
     res.send(posts);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get post by id
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).send("No post found");
+    }
+    res.send(post);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -102,6 +115,7 @@ router.patch("/like/:id", auth, async (req, res) => {
 
 // Add comment
 router.post("/comment/:id", auth, async (req, res) => {
+  console.log("hello");
   try {
     const profile = await Profile.findOne({
       user: req.user.id
