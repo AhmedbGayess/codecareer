@@ -1,8 +1,8 @@
 import { SET_PROFILE, SET_PROFILES, SET_PROFILE_LOADING } from "../types";
 
 const initialState = {
-  profiles: [],
-  profile: {},
+  profiles: null,
+  profile: null,
   loading: false
 };
 

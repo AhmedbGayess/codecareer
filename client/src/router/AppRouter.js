@@ -5,7 +5,8 @@ import PrivateRoute from "./PrivateRoute";
 import Navbar from "../components/layout/Navbar";
 import Login from "../components/auth/Login";
 import Signup from "../components/auth/Signup";
-import EditProfile from "../components/profile/EditProfile";
+import EditProfile from "../components/edit-profile/EditProfile";
+import DevProfile from "../components/profile/DevProfile";
 
 const AppRouter = () => (
   <Router>
@@ -14,6 +15,7 @@ const AppRouter = () => (
       <PublicRoute path="/" exact component={Login} />
       <PublicRoute path="/register" exact component={Signup} />
       <PrivateRoute path="/edit-profile" exact component={EditProfile} />
+      <PrivateRoute path="/me" exact component={DevProfile} />
     </Switch>
   </Router>
 );

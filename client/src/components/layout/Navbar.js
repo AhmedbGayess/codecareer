@@ -42,11 +42,22 @@ const Navbar = ({ history, isAuthenticated, logout }) => {
           </>
         )}
         {isAuthenticated && (
-          <li className="nav__list-item">
-            <span className="nav__list-link" onClick={logoutUser}>
-              Logout
-            </span>
-          </li>
+          <>
+            <li className="nav__list-item">
+              <NavLink
+                to="/me"
+                className="nav__list-link"
+                activeClassName="nav__list-link--active"
+              >
+                My Profile
+              </NavLink>
+            </li>
+            <li className="nav__list-item">
+              <span className="nav__list-link" onClick={logoutUser}>
+                Logout
+              </span>
+            </li>
+          </>
         )}
       </ul>
     </nav>

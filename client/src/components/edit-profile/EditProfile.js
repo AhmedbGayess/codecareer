@@ -33,14 +33,16 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
   }, []);
 
   useEffect(() => {
-    setAbout(profile.about || "");
-    setLocation(profile.location || "");
-    setExperience(profile.experience || []);
-    setEducation(profile.education || []);
-    setSkills(profile.skills || []);
-    setGithub(profile.github || "");
-    setWebsite(profile.website || "");
-    setProfilePicture(profile.profilePicture || "");
+    if (profile) {
+      setAbout(profile.about || "");
+      setLocation(profile.location || "");
+      setExperience(profile.experience || []);
+      setEducation(profile.education || []);
+      setSkills(profile.skills || []);
+      setGithub(profile.github || "");
+      setWebsite(profile.website || "");
+      setProfilePicture(profile.profilePicture || "");
+    }
   }, [profile]);
 
   const addEducation = (ed) => {
@@ -203,7 +205,10 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
 EditProfile.propTypes = {
   editProfile: PropTypes.func.isRequired,
   getOwnProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.instanceOf(null).isRequired
+  ])
 };
 
 const mapStateToProps = (state) => ({
