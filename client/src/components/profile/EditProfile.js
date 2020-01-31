@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { editProfile, getOwnProfile } from "../../store/actions/profiles";
+import "./EditProfile.scss";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
 import ProfileForm from "./ProfileForm";
 import EdExpList from "./EdExpList";
-import "./EditProfile.scss";
-import axios from "axios";
 import ProfileImageInput from "./ProfileImageInput";
 import ProfilePicture from "./ProfilePicture";
-import { editProfile, getOwnProfile } from "../../store/actions/profiles";
+import SkillForm from "./SkillForm";
+import SkillList from "./SkillList";
 
 const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
   const [about, setAbout] = useState("");
@@ -17,6 +19,7 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
   const [experience, setExperience] = useState([]);
   const [education, setEducation] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [skill, setSkill] = useState("");
   const [github, setGithub] = useState("");
   const [website, setWebsite] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
@@ -62,6 +65,18 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
 
   const toggleExperienceForm = () => {
     setExperienceFormVisible(!isExperienceFormVisible);
+  };
+
+  const addSkill = (e) => {
+    e.preventDefault();
+    if (skill !== "") {
+      setSkills([...skills, skill]);
+      setSkill("");
+    }
+  };
+
+  const deleteSkill = (skill) => {
+    setSkills(skills.filter((s) => s !== skill));
   };
 
   const uploadImage = async (e) => {
@@ -147,6 +162,8 @@ const EditProfile = ({ editProfile, history, getOwnProfile, profile }) => {
             aboutError={aboutError}
             locationError={locationError}
           />
+          <SkillForm skill={skill} setSkill={setSkill} addSkill={addSkill} />
+          <SkillList skills={skills} deleteSkill={deleteSkill} />
           <EdExpList
             edExp={education}
             toggleForm={toggleEducationForm}

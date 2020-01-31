@@ -1,0 +1,23 @@
+.skills {
+  margin: 0.5rem 0;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+  &__item {
+    border: 1px solid #f76f7f;
+    border-radius: 3px;
+    padding: 10px;
+    margin-right: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      background: #f76f7f;
+    }
+  }
+
+  &__caution {
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+}
