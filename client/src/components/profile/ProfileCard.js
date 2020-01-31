@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./ProfileCard.scss";
 
-const ProfileCard = ({ name, profilePicture, about, location }) => {
+const ProfileCard = ({ name, profilePicture, about, location, skills }) => {
+  const skillsList = skills.map((skill, i) =>
+    i !== skills.length - 1 ? (
+      <span key={skill}>{skill}, </span>
+    ) : (
+      <span key={skill}>{skill}</span>
+    )
+  );
   return (
     <div className="profile-card">
       <div className="profile-card__header"></div>
@@ -13,6 +20,7 @@ const ProfileCard = ({ name, profilePicture, about, location }) => {
           <h1 className="profile-card__name">{name}</h1>
           <p className="profile-card__about">{about}</p>
           <p className="profile-card__location">{location}</p>
+          <p>Skills: {skillsList}</p>
         </div>
         <Link to="/edit-profile" className="btn btn--secondary">
           Edit Profile

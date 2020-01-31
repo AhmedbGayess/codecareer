@@ -34,6 +34,7 @@ const DevProfile = ({ profile, loading, getOwnProfile }) => {
           about={about}
           location={location}
           profilePicture={profilePicture}
+          skills={skills}
         />
       </div>
     </div>
