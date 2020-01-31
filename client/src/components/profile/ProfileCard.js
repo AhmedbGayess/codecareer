@@ -10,7 +10,8 @@ const ProfileCard = ({
   location,
   skills,
   github,
-  website
+  website,
+  myProfile
 }) => {
   const skillsList = skills.map((skill, i) =>
     i !== skills.length - 1 ? (
@@ -44,9 +45,11 @@ const ProfileCard = ({
             </a>
           )}
         </div>
-        <Link to="/edit-profile" className="btn btn--secondary">
-          Edit Profile
-        </Link>
+        {myProfile && (
+          <Link to="/edit-profile" className="btn btn--secondary">
+            Edit Profile
+          </Link>
+        )}
       </div>
     </div>
   );

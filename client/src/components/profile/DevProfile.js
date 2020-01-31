@@ -5,7 +5,7 @@ import { getOwnProfile } from "../../store/actions/profiles";
 import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
 
-const DevProfile = ({ profile, loading, getOwnProfile }) => {
+const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
   useEffect(() => {
     getOwnProfile();
   }, []);
@@ -26,6 +26,7 @@ const DevProfile = ({ profile, loading, getOwnProfile }) => {
     profilePicture
   } = profile;
 
+  const myProfile = history.location.pathname === "/me";
   return (
     <div>
       <div className="container">
@@ -37,6 +38,7 @@ const DevProfile = ({ profile, loading, getOwnProfile }) => {
           skills={skills}
           github={github}
           website={website}
+          myProfile={myProfile}
         />
       </div>
     </div>
