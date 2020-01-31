@@ -4,7 +4,8 @@ import {
   DELETE_POST,
   SET_POST,
   SET_POSTS,
-  SET_POST_LOADING
+  SET_POST_LOADING,
+  LIKE_POST
 } from "../types";
 
 export const addPost = (text) => async (dispatch) => {
@@ -30,6 +31,16 @@ export const getPosts = (skip) => async (dispatch) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch(`/api/posts/like/${id}`);
+    dispatch({
+      type: LIKE_POST,
+      payload: { id, likes: data }
+    });
+  } catch (err) {}
 };
 
 const setPostLoading = () => ({

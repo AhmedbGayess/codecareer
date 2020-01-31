@@ -1,9 +1,9 @@
 .feed-post {
   border: 1px solid #ccc;
-  padding: 1rem;
   margin: 1rem auto;
   width: 70%;
   &__user {
+    padding: 1rem;
     display: flex;
     align-items: center;
   }
@@ -19,10 +19,32 @@
   }
 
   &__text {
+    padding: 1rem;
     margin: 1rem;
   }
 
   &__users {
     text-align: right;
+    padding: 1rem;
+  }
+
+  &__buttons {
+    border-top: 1px solid #ccc;
+    display: flex;
+  }
+
+  &__button {
+    border: none;
+    font-size: 16px;
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    outline: none;
+
+    &--liked {
+      background: green;
+      color: #fff;
+    }
   }
 }

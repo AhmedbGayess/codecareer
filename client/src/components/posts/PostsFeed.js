@@ -15,7 +15,7 @@ const PostsFeed = ({ posts, fetchPosts }) => (
           id={_id}
           name={name}
           image={profilePicture}
-          likes={likes.length}
+          likes={likes}
           comments={comments.length}
         />
       );

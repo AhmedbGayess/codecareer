@@ -94,7 +94,7 @@ router.patch("/like/:id", auth, async (req, res) => {
       post.likes.push(req.user.id);
     }
     await post.save();
-    res.send(post);
+    res.send(post.likes);
   } catch (err) {
     res.status(500).send(err.message);
   }

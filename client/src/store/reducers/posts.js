@@ -3,7 +3,8 @@ import {
   DELETE_POST,
   SET_POST,
   SET_POSTS,
-  SET_POST_LOADING
+  SET_POST_LOADING,
+  LIKE_POST
 } from "../types";
 
 const initialState = {
@@ -37,6 +38,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload)
+      };
+    case LIKE_POST:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === action.payload.id
+            ? { ...post, likes: action.payload.likes }
+            : post
+        )
       };
     default:
       return state;
