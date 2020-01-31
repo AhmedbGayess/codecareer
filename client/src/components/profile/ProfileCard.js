@@ -28,6 +28,7 @@ const ProfileCard = ({
       <img
         src={profilePicture ? `/images/${profilePicture}` : avatar}
         className="profile-card__image"
+        alt="user"
       />
       <div className="profile-card__description">
         <div className="profile-card__text">
