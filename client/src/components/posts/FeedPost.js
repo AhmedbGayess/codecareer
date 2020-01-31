@@ -4,9 +4,18 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { likePost } from "../../store/actions/posts";
 import avatar from "../../images/avatar.png";
-import "./Post.scss";
+import "./FeedPost.scss";
 
-const Post = ({ id, text, name, image, likes, comments, userId, likePost }) => {
+const FeedPost = ({
+  id,
+  text,
+  name,
+  image,
+  likes,
+  comments,
+  userId,
+  likePost
+}) => {
   const isLiked = likes.find((like) => like._id === userId);
 
   const like = () => {
@@ -25,7 +34,7 @@ const Post = ({ id, text, name, image, likes, comments, userId, likePost }) => {
       </div>
       <p className="feed-post__text">{text}</p>
       <p className="feed-post__users">
-        {likes.length} Likes - {comments} Comments
+        {likes.length} Like(s) - {comments} Comment(s)
       </p>
       <div className="feed-post__buttons">
         <button
@@ -43,7 +52,7 @@ const Post = ({ id, text, name, image, likes, comments, userId, likePost }) => {
   );
 };
 
-Post.propTypes = {
+FeedPost.propTypes = {
   id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -58,4 +67,4 @@ const mapStateToProps = (state) => ({
   userId: state.auth.user.id
 });
 
-export default connect(mapStateToProps, { likePost })(Post);
+export default connect(mapStateToProps, { likePost })(FeedPost);
