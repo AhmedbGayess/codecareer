@@ -33,4 +33,14 @@
   &__text {
     flex: 1;
   }
+
+  &__link {
+    font-weight: bold;
+    display: block;
+    color: #07065b;
+
+    &:hover {
+      color: #f76f7f;
+    }
+  }
 }

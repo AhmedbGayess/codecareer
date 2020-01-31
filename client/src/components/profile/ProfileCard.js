@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./ProfileCard.scss";
 
-const ProfileCard = ({ name, profilePicture, about, location, skills }) => {
+const ProfileCard = ({
+  name,
+  profilePicture,
+  about,
+  location,
+  skills,
+  github,
+  website
+}) => {
   const skillsList = skills.map((skill, i) =>
     i !== skills.length - 1 ? (
       <span key={skill}>{skill}, </span>
@@ -20,7 +28,21 @@ const ProfileCard = ({ name, profilePicture, about, location, skills }) => {
           <h1 className="profile-card__name">{name}</h1>
           <p className="profile-card__about">{about}</p>
           <p className="profile-card__location">{location}</p>
-          <p>Skills: {skillsList}</p>
+          {skills && <p>Skills: {skillsList}</p>}
+          {github && (
+            <a
+              href={`https://github.com/${github}`}
+              target="_blank"
+              className="profile-card__link"
+            >
+              Github Profile
+            </a>
+          )}
+          {website && (
+            <a href={website} target="_blank" className="profile-card__link">
+              {website}
+            </a>
+          )}
         </div>
         <Link to="/edit-profile" className="btn btn--secondary">
           Edit Profile
