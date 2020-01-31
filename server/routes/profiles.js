@@ -22,6 +22,7 @@ router.post("/", auth, async (req, res) => {
 
   const profileObject = {};
   profileObject.user = req.user.id;
+  profileObject.name = req.user.name;
   profileObject.about = about;
   profileObject.location = location;
   if (website) {
@@ -57,7 +58,7 @@ router.post("/", auth, async (req, res) => {
       return res.send(profile);
     }
 
-    profile = new Profile(profileObject);
+    profile = new Profile({ profileObject });
     await profile.save();
     res.send(profile);
   } catch (err) {
