@@ -26,6 +26,15 @@ const PostPage = ({ getPost, posts, match, addComment }) => {
     <div className="container">
       <Post name={name} image={profilePicture} text={text} />
       <PostForm title="Add Comment" submit={postComment} />
+      <h1>Comments</h1>
+      {comments.map((comment) => (
+        <Post
+          key={comment._id}
+          name={comment.name}
+          image={comment.profilePicture}
+          text={comment.text}
+        />
+      ))}
     </div>
   );
 };

@@ -144,7 +144,7 @@ router.post("/comment/:id", auth, async (req, res) => {
 
     post.comments.unshift(comment);
     await post.save();
-    res.send(post);
+    res.send(comment);
   } catch (err) {
     res.status(500).send(err.message);
   }

@@ -36,7 +36,7 @@ const PostSchema = new mongoose.Schema({
       name: {
         type: String
       },
-      avatar: {
+      profilePicture: {
         type: String
       },
       date: {
