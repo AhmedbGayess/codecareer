@@ -1,0 +1,8 @@
+.profile-edexp-item {
+  margin: 1rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+}

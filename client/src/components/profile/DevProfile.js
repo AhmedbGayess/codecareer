@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { getOwnProfile } from "../../store/actions/profiles";
 import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
+import DevEdExpList from "./DevEdExpList";
 
 const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
   useEffect(() => {
@@ -40,6 +41,8 @@ const DevProfile = ({ profile, loading, getOwnProfile, history }) => {
           website={website}
           myProfile={myProfile}
         />
+        {experience && <DevEdExpList list={experience} title="Experience" />}
+        {education && <DevEdExpList list={education} title="Education" />}
       </div>
     </div>
   );
