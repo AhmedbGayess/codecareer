@@ -62,6 +62,18 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// Get user's post
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.params.id })
+      .limit(10)
+      .skip(parseInt(req.params.skip));
+    res.send(posts);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 // Like/ Unlike post
 router.patch("/like/:id", auth, async (req, res) => {
   try {

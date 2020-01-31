@@ -7,11 +7,11 @@ export const login = (userInfo, history) => async (dispatch) => {
   try {
     const { data } = await axios.post("/api/users/login", userInfo);
     localStorage.setItem("authToken", data.token);
+    setAuthToken(data.token);
     const decoded = jwt_decode(data.token);
-    setAuthToken(decoded);
     dispatch(setCurrentUser(decoded));
     dispatch(resetAuthError());
-    history.push("/azerty");
+    history.push("/home");
   } catch (err) {
     dispatch({
       type: SET_AUTH_ERROR,
@@ -28,7 +28,7 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     setAuthToken(decoded);
     dispatch(setCurrentUser(decoded));
     dispatch(resetAuthError());
-    history.push("/azerty");
+    history.push("/home");
   } catch (err) {
     if (err.response.data.includes("duplicate key")) {
       dispatch({
