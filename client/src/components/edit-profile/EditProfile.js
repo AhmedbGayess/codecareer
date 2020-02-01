@@ -12,6 +12,7 @@ import ProfileImageInput from "./ProfileImageInput";
 import ProfilePicture from "./ProfilePicture";
 import SkillForm from "./SkillForm";
 import SkillList from "./SkillList";
+import DeleteProfile from "./DeleteProfile";
 
 const EditProfile = ({
   editProfile,
@@ -213,6 +214,7 @@ const EditProfile = ({
             Save profile
           </button>
         </>
+        {profile && Object.keys(profile).length > 0 && <DeleteProfile />}
       </div>
     </div>
   );

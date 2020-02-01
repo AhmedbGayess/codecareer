@@ -1,0 +1,12 @@
+.delete-profile {
+  border: 1px solid red;
+  margin: 1rem 0;
+  padding: 2rem;
+  text-align: center;
+
+  &__warning {
+    font-size: 1.3rem;
+    color: red;
+    margin-bottom: 2rem;
+  }
+}

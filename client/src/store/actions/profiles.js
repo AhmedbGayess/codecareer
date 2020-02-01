@@ -7,6 +7,8 @@ import {
   CLEAR_PROFILES
 } from "../types";
 
+import { logout } from "./auth";
+
 export const editProfile = (profileData, history) => async (dispatch) => {
   try {
     await axios.post("/api/profiles", profileData);
@@ -58,6 +60,15 @@ export const getProfiles = (skip, search) => async (dispatch) => {
       type: SET_PROFILES,
       payload: data
     });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteProfile = () => async (dispatch) => {
+  try {
+    await axios.delete("/api/profiles");
+    dispatch(logout());
   } catch (err) {
     console.log(err);
   }
