@@ -22,6 +22,12 @@ const ProfileLink = ({ id, name, image, location, about }) => {
   );
 };
 
-ProfileLink.propTypes = {};
+ProfileLink.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  about: PropTypes.string.isRequired
+};
 
 export default ProfileLink;
