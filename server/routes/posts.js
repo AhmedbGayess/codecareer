@@ -67,7 +67,8 @@ router.get("/user/:id", auth, async (req, res) => {
   try {
     const posts = await Post.find({ user: req.params.id })
       .limit(10)
-      .skip(parseInt(req.params.skip));
+      .skip(parseInt(req.query.skip));
+    console.log(posts);
     res.send(posts);
   } catch (err) {
     res.status(500).send(err.message);

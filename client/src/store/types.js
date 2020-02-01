@@ -11,3 +11,4 @@ export const SET_POST_LOADING = "SET_POST_LOADING";
 export const LIKE_POST = "LIKE_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const CLEAR_POSTS = "CLEAR_POSTS";

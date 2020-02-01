@@ -1,15 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOwnProfile } from "../../store/actions/profiles";
+import { getUserPosts, clearPosts } from "../../store/actions/posts";
 import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
 import DevEdExpList from "./DevEdExpList";
+import PostsFeed from "../posts/PostsFeed";
 
-const Profile = ({ profile, loading, getOwnProfile, history, role }) => {
+const Profile = ({
+  profile,
+  loading,
+  getOwnProfile,
+  getUserPosts,
+  history,
+  role,
+  userId,
+  posts,
+  match,
+  clearPosts
+}) => {
+  const [skip, setSkip] = useState(0);
+
   useEffect(() => {
     getOwnProfile();
+    fetchPosts();
+
+    return () => {
+      clearPosts();
+    };
   }, []);
+
+  const fetchPosts = () => {
+    const id = match.path === "/me" ? userId : match.params.id;
+    getUserPosts(id, skip);
+    setSkip(skip + 10);
+  };
 
   if (!profile || loading) {
     return <Loader />;
@@ -50,6 +76,7 @@ const Profile = ({ profile, loading, getOwnProfile, history, role }) => {
         {isDeveloper && education && (
           <DevEdExpList list={education} title="Education" />
         )}
+        <PostsFeed fetchPosts={fetchPosts} />
       </div>
     </div>
   );
@@ -61,13 +88,24 @@ Profile.propTypes = {
     PropTypes.instanceOf(null).isRequired
   ]),
   loading: PropTypes.bool.isRequired,
-  getOwnProfile: PropTypes.func.isRequired
+  getOwnProfile: PropTypes.func.isRequired,
+  getUserPosts: PropTypes.func.isRequired,
+  clearPosts: PropTypes.func.isRequired,
+  role: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  posts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profiles.profile,
   loading: state.profiles.loading,
-  role: state.auth.user.role
+  role: state.auth.user.role,
+  userId: state.auth.user.id,
+  posts: state.posts.posts
 });
 
-export default connect(mapStateToProps, { getOwnProfile })(Profile);
+export default connect(mapStateToProps, {
+  getOwnProfile,
+  getUserPosts,
+  clearPosts
+})(Profile);

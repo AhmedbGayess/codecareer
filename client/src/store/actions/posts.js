@@ -7,7 +7,8 @@ import {
   LIKE_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  DELETE_POST
+  DELETE_POST,
+  CLEAR_POSTS
 } from "../types";
 
 export const addPost = (text) => async (dispatch) => {
@@ -26,6 +27,19 @@ export const getPosts = (skip) => async (dispatch) => {
   dispatch(setPostLoading());
   try {
     const { data } = await axios.get(`/api/posts?skip=${skip}`);
+    dispatch({
+      type: SET_POSTS,
+      payload: data
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getUserPosts = (id, skip) => async (dispatch) => {
+  dispatch(setPostLoading());
+  try {
+    const { data } = await axios.get(`/api/posts/user/${id}?skip=${skip}`);
     dispatch({
       type: SET_POSTS,
       payload: data
@@ -93,6 +107,10 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const clearPosts = () => ({
+  type: CLEAR_POSTS
+});
 
 const setPostLoading = () => ({
   type: SET_POST_LOADING
