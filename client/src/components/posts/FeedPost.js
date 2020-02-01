@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { likePost } from "../../store/actions/posts";
+import { likePost, deletePost } from "../../store/actions/posts";
 import avatar from "../../images/avatar.png";
 import "./FeedPost.scss";
 
@@ -14,12 +14,20 @@ const FeedPost = ({
   likes,
   comments,
   userId,
-  likePost
+  likePost,
+  user,
+  deletePost
 }) => {
   const isLiked = likes.find((like) => like._id === userId);
 
+  const isUser = user === userId;
+
   const like = () => {
     likePost(id);
+  };
+
+  const removePost = () => {
+    deletePost(id);
   };
 
   return (
@@ -48,6 +56,14 @@ const FeedPost = ({
           Comments
         </Link>
       </div>
+      {isUser && (
+        <button
+          className="btn btn--delete feed-post__delete"
+          onClick={removePost}
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 };
@@ -60,11 +76,13 @@ FeedPost.propTypes = {
   likes: PropTypes.array.isRequired,
   comments: PropTypes.number.isRequired,
   userId: PropTypes.string.isRequired,
-  likePost: PropTypes.func.isRequired
+  user: PropTypes.string.isRequired,
+  likePost: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   userId: state.auth.user.id
 });
 
-export default connect(mapStateToProps, { likePost })(FeedPost);
+export default connect(mapStateToProps, { likePost, deletePost })(FeedPost);

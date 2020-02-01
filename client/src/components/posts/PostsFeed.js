@@ -7,7 +7,7 @@ import FeedPost from "./FeedPost";
 const PostsFeed = ({ posts, fetchPosts }) => (
   <InfiniteScroll dataLength={posts.length} next={fetchPosts} hasMore={true}>
     {posts.map((post) => {
-      const { _id, text, name, profilePicture, likes, comments } = post;
+      const { _id, text, name, profilePicture, likes, comments, user } = post;
       return (
         <FeedPost
           key={_id}
@@ -17,6 +17,7 @@ const PostsFeed = ({ posts, fetchPosts }) => (
           image={profilePicture}
           likes={likes}
           comments={comments.length}
+          user={user}
         />
       );
     })}

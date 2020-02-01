@@ -144,7 +144,7 @@ router.post("/comment/:id", auth, async (req, res) => {
 
     post.comments.unshift(comment);
     await post.save();
-    res.send(comment);
+    res.send(post.comments[0]);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -181,7 +181,7 @@ router.delete("/comment/:post_id/:comment_id", auth, async (req, res) => {
     post.comments = filteredComments;
 
     await post.save();
-    res.send(post);
+    res.send(post.comments);
   } catch (err) {
     res.status(500).send(err.message);
   }
