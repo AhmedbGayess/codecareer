@@ -26,7 +26,7 @@ const Profiles = ({ getProfiles, profiles, clearProfiles }) => {
   };
 
   const searchProfiles = () => {
-    getProfiles(skip, search);
+    getProfiles(skip, searchQuery);
     setSkip(skip + 10);
   };
 
