@@ -70,8 +70,6 @@ router.post("/", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
   req.query.search = req.query.search ? req.query.search : "";
   const searchQuery = req.query.search.trim().toLowerCase();
-  console.log(searchQuery === "ahmed");
-
   try {
     const profiles = await Profile.find({
       $or: [
@@ -96,7 +94,6 @@ router.get("/", auth, async (req, res) => {
     if (!profiles) {
       return res.status(404).send("No profiles found");
     }
-    console.log(profiles);
     res.send(profiles);
   } catch (err) {
     res.status(500).send(err.message);

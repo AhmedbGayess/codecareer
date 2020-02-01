@@ -47,7 +47,7 @@ const Profiles = ({ getProfiles, profiles, clearProfiles }) => {
         {profiles.map((profile) => (
           <ProfileLink
             key={profile._id}
-            id={profile._id}
+            id={profile.user._id}
             name={profile.name}
             image={profile.profilePicture}
             location={profile.location}
