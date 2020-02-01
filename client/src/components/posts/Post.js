@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import avatar from "../../images/avatar.png";
 
 import "./Post.scss";
+import { Link } from "react-router-dom";
 
 const Post = ({ user, image, name, text, id, remove, userId }) => {
   const deletePost = () => {
@@ -15,12 +16,16 @@ const Post = ({ user, image, name, text, id, remove, userId }) => {
   return (
     <div className="post">
       <div className="post__user">
-        <img
-          src={image ? `/images/${image}` : avatar}
-          className="post__image"
-          alt="user"
-        />
-        <p className="post__name">{name}</p>
+        <Link to={`/profile/${user}`}>
+          <img
+            src={image ? `/images/${image}` : avatar}
+            className="post__image"
+            alt="user"
+          />
+        </Link>
+        <Link to={`/profile/${user}`} className="post__name">
+          {name}
+        </Link>
       </div>
       <p className="post__text">{text}</p>
       {isUser && (

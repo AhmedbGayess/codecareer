@@ -33,12 +33,16 @@ const FeedPost = ({
   return (
     <div className="feed-post">
       <div className="feed-post__user">
-        <img
-          src={image ? `/images/${image}` : avatar}
-          className="feed-post__image"
-          alt="user"
-        />
-        <p className="feed-post__name">{name}</p>
+        <Link to={`/profile/${user}`}>
+          <img
+            src={image ? `/images/${image}` : avatar}
+            className="feed-post__image"
+            alt="user"
+          />
+        </Link>
+        <Link to={`/profile/${user}`} className="feed-post__name">
+          {name}
+        </Link>
       </div>
       <p className="feed-post__text">{text}</p>
       <p className="feed-post__users">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getOwnProfile } from "../../store/actions/profiles";
+import { getOwnProfile, getProfile } from "../../store/actions/profiles";
 import { getUserPosts, clearPosts } from "../../store/actions/posts";
 import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
@@ -16,14 +16,19 @@ const Profile = ({
   history,
   role,
   userId,
-  posts,
   match,
-  clearPosts
+  clearPosts,
+  getProfile
 }) => {
   const [skip, setSkip] = useState(0);
+  const id = match.path === "/me" ? userId : match.params.id;
 
   useEffect(() => {
-    getOwnProfile();
+    if (match.path === "/me") {
+      getOwnProfile(id);
+    } else {
+      getProfile(id);
+    }
     fetchPosts();
 
     return () => {
@@ -32,7 +37,6 @@ const Profile = ({
   }, []);
 
   const fetchPosts = () => {
-    const id = match.path === "/me" ? userId : match.params.id;
     getUserPosts(id, skip);
     setSkip(skip + 10);
   };
@@ -70,10 +74,10 @@ const Profile = ({
           myProfile={myProfile}
           isDeveloper={isDeveloper}
         />
-        {isDeveloper && experience && (
+        {isDeveloper && experience.lenght > 0 && (
           <DevEdExpList list={experience} title="Experience" />
         )}
-        {isDeveloper && education && (
+        {isDeveloper && education.length > 0 && (
           <DevEdExpList list={education} title="Education" />
         )}
         <PostsFeed fetchPosts={fetchPosts} />
@@ -89,23 +93,23 @@ Profile.propTypes = {
   ]),
   loading: PropTypes.bool.isRequired,
   getOwnProfile: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired,
   getUserPosts: PropTypes.func.isRequired,
   clearPosts: PropTypes.func.isRequired,
   role: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-  posts: PropTypes.array.isRequired
+  userId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profiles.profile,
   loading: state.profiles.loading,
   role: state.auth.user.role,
-  userId: state.auth.user.id,
-  posts: state.posts.posts
+  userId: state.auth.user.id
 });
 
 export default connect(mapStateToProps, {
   getOwnProfile,
   getUserPosts,
-  clearPosts
+  clearPosts,
+  getProfile
 })(Profile);

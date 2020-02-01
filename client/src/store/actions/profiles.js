@@ -27,6 +27,22 @@ export const getOwnProfile = () => async (dispatch) => {
   }
 };
 
+export const getProfile = (id) => async (dispatch) => {
+  dispatch(setProfileLoading());
+  try {
+    const { data } = await axios.get(`/api/profiles/user/${id}`);
+    dispatch({
+      type: SET_PROFILE,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: SET_PROFILE,
+      payload: {}
+    });
+  }
+};
+
 const setProfileLoading = () => ({
   type: SET_PROFILE_LOADING
 });
