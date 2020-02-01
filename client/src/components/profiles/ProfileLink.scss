@@ -1,0 +1,14 @@
+.profile-link {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin: 1rem auto;
+  width: 60%;
+
+  &__image {
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 5rem;
+  }
+}

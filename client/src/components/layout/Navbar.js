@@ -45,6 +45,15 @@ const Navbar = ({ history, isAuthenticated, logout }) => {
           <>
             <li className="nav__list-item">
               <NavLink
+                to="/developers"
+                className="nav__list-link"
+                activeClassName="nav__list-link--active"
+              >
+                Developers
+              </NavLink>
+            </li>
+            <li className="nav__list-item">
+              <NavLink
                 to="/me"
                 className="nav__list-link"
                 activeClassName="nav__list-link--active"

@@ -70,6 +70,7 @@ router.post("/", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
   req.query.search = req.query.search ? req.query.search : "";
   const searchQuery = req.query.search.trim().toLowerCase();
+  console.log(searchQuery === "ahmed");
 
   try {
     const profiles = await Profile.find({
@@ -89,12 +90,13 @@ router.get("/", auth, async (req, res) => {
       ]
     })
       .populate("user", ["email", "role"])
-      .select("-experience -about -education -github -website")
+      .select("-experience -education -github -website")
       .limit(10)
       .skip(parseInt(req.query.skip));
     if (!profiles) {
       return res.status(404).send("No profiles found");
     }
+    console.log(profiles);
     res.send(profiles);
   } catch (err) {
     res.status(500).send(err.message);

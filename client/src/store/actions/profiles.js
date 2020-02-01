@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { SET_PROFILE, SET_PROFILES, SET_PROFILE_LOADING } from "../types";
+import {
+  SET_PROFILE,
+  SET_PROFILES,
+  SET_PROFILE_LOADING,
+  CLEAR_PROFILES
+} from "../types";
 
 export const editProfile = (profileData, history) => async (dispatch) => {
   try {
@@ -42,6 +47,25 @@ export const getProfile = (id) => async (dispatch) => {
     });
   }
 };
+
+export const getProfiles = (skip, search) => async (dispatch) => {
+  dispatch(setProfileLoading());
+  try {
+    const { data } = await axios.get(
+      `/api/profiles?skip=${skip}&search=${search}`
+    );
+    dispatch({
+      type: SET_PROFILES,
+      payload: data
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const clearProfiles = () => ({
+  type: CLEAR_PROFILES
+});
 
 const setProfileLoading = () => ({
   type: SET_PROFILE_LOADING

@@ -3,6 +3,7 @@ export const SET_AUTH_ERROR = "SET_AUTH_ERROR";
 export const SET_PROFILE = "SET_PROFILE";
 export const SET_PROFILES = "SET_PROFILES";
 export const SET_PROFILE_LOADING = "SET_PROFILE_LOADING";
+export const CLEAR_PROFILES = "CLEAR_PROFILES";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
 export const SET_POST = "SET_POST";

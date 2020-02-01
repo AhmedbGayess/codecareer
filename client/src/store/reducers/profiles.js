@@ -1,7 +1,12 @@
-import { SET_PROFILE, SET_PROFILES, SET_PROFILE_LOADING } from "../types";
+import {
+  SET_PROFILE,
+  SET_PROFILES,
+  SET_PROFILE_LOADING,
+  CLEAR_PROFILES
+} from "../types";
 
 const initialState = {
-  profiles: null,
+  profiles: [],
   profile: null,
   loading: false
 };
@@ -19,8 +24,13 @@ export default (state = initialState, action) => {
     case SET_PROFILES:
       return {
         ...state,
-        profiles: action.payload,
+        profiles: [...state.profiles, ...action.payload],
         loading: false
+      };
+    case CLEAR_PROFILES:
+      return {
+        ...state,
+        profiles: []
       };
     default:
       return state;

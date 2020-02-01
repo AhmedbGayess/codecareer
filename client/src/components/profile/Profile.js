@@ -74,7 +74,7 @@ const Profile = ({
           myProfile={myProfile}
           isDeveloper={isDeveloper}
         />
-        {isDeveloper && experience.lenght > 0 && (
+        {isDeveloper && experience.length > 0 && (
           <DevEdExpList list={experience} title="Experience" />
         )}
         {isDeveloper && education.length > 0 && (

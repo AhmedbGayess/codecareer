@@ -9,6 +9,7 @@ import EditProfile from "../components/edit-profile/EditProfile";
 import Profile from "../components/profile/Profile";
 import Home from "../components/home/Home";
 import PostPage from "../components/posts/PostPage";
+import Profiles from "../components/profiles/Profiles";
 
 const AppRouter = () => (
   <Router>
@@ -22,6 +23,7 @@ const AppRouter = () => (
       <PrivateRoute path="/profile/:id" exact component={Profile} />
       <PrivateRoute path="/post/:id" exact component={PostPage} />
       <PrivateRoute path="/edit-user" exact component={Signup} />
+      <PrivateRoute path="/developers" exact component={Profiles} />
     </Switch>
   </Router>
 );
