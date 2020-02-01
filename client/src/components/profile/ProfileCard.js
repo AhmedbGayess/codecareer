@@ -52,9 +52,17 @@ const ProfileCard = ({
           )}
         </div>
         {myProfile && (
-          <Link to="/edit-profile" className="btn btn--secondary">
-            Edit Profile
-          </Link>
+          <>
+            <Link to="/edit-profile" className="btn btn--secondary">
+              Edit Profile
+            </Link>
+            <Link
+              to="/edit-user"
+              className="btn btn--secondary profile-card__edit"
+            >
+              Edit Info
+            </Link>
+          </>
         )}
       </div>
     </div>

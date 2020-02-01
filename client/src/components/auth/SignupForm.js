@@ -2,14 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { registerUser, resetAuthError } from "../../store/actions/auth";
+import {
+  registerUser,
+  resetAuthError,
+  editUser
+} from "../../store/actions/auth";
 import FormInput from "../common/FormInput";
 import SelectInput from "../common/SelectInput";
 import "./SignupForm.scss";
 
-const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+const SignupForm = ({
+  history,
+  registerUser,
+  authError,
+  resetAuthError,
+  editPage,
+  user,
+  editUser
+}) => {
+  const [name, setName] = useState(user.name || "");
+  const [email, setEmail] = useState(user.email || "");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("developer");
   const [nameError, setNameError] = useState("");
@@ -20,6 +32,12 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
     resetAuthError();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (editPage) {
+      const { email, name } = user;
+    }
+  });
 
   const handleValidation = () => {
     let isFormValid = true;
@@ -53,6 +71,9 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
     const isFormValid = handleValidation();
     if (!isFormValid) {
       return;
+    }
+    if (editPage) {
+      editUser({ name, email, password }, history);
     } else {
       registerUser({ name, email, password, role }, history);
     }
@@ -86,20 +107,26 @@ const SignupForm = ({ history, registerUser, authError, resetAuthError }) => {
         onChange={setPassword}
         error={passwordError}
       />
-      <SelectInput
-        name="role"
-        choices={["developer", "company"]}
-        value={role}
-        onChange={setRole}
-        label="You are a..."
-      />
-      <button className="btn btn--primary">Sign Up</button>
-      <p className="signup-form__join">
-        Already have an account?{" "}
-        <Link className="signup-form__link" to="/">
-          Sign in!
-        </Link>
-      </p>
+      {!editPage && (
+        <SelectInput
+          name="role"
+          choices={["developer", "company"]}
+          value={role}
+          onChange={setRole}
+          label="You are a..."
+        />
+      )}
+      <button className="btn btn--primary">
+        {editPage ? "Save" : "Sign Up"}
+      </button>
+      {!editPage && (
+        <p className="signup-form__join">
+          Already have an account?{" "}
+          <Link className="signup-form__link" to="/">
+            Sign in!
+          </Link>
+        </p>
+      )}
     </form>
   );
 };
@@ -108,13 +135,19 @@ SignupForm.propTypes = {
   registerUser: PropTypes.func.isRequired,
   authError: PropTypes.string.isRequired,
   resetAuthError: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  editPage: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  editUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  authError: state.auth.authError
+  authError: state.auth.authError,
+  user: state.auth.user
 });
 
-export default connect(mapStateToProps, { registerUser, resetAuthError })(
-  SignupForm
-);
+export default connect(mapStateToProps, {
+  registerUser,
+  resetAuthError,
+  editUser
+})(SignupForm);

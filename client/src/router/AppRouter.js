@@ -20,6 +20,7 @@ const AppRouter = () => (
       <PrivateRoute path="/edit-profile" exact component={EditProfile} />
       <PrivateRoute path="/me" exact component={Profile} />
       <PrivateRoute path="/post/:id" exact component={PostPage} />
+      <PrivateRoute path="/edit-user" exact component={Signup} />
     </Switch>
   </Router>
 );

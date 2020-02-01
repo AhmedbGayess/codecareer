@@ -25,7 +25,26 @@ export const registerUser = (userInfo, history) => async (dispatch) => {
     const { data } = await axios.post("/api/users", userInfo);
     localStorage.setItem("authToken", data.token);
     const decoded = jwt_decode(data.token);
-    setAuthToken(decoded);
+    setAuthToken(data.token);
+    dispatch(setCurrentUser(decoded));
+    dispatch(resetAuthError());
+    history.push("/home");
+  } catch (err) {
+    if (err.response.data.includes("duplicate key")) {
+      dispatch({
+        type: SET_AUTH_ERROR,
+        payload: "Email already used"
+      });
+    }
+  }
+};
+
+export const editUser = (userInfo, history) => async (dispatch) => {
+  try {
+    const { data } = await axios.patch("/api/users", userInfo);
+    localStorage.setItem("authToken", data.token);
+    const decoded = jwt_decode(data.token);
+    setAuthToken(data.token);
     dispatch(setCurrentUser(decoded));
     dispatch(resetAuthError());
     history.push("/home");

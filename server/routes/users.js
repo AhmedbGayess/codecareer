@@ -19,7 +19,8 @@ router.post("/", async (req, res) => {
     const payload = {
       id: user._id,
       role: user.role,
-      name: user.name
+      name: user.name,
+      email: user.email
     };
 
     jwt.sign(
@@ -56,7 +57,8 @@ router.post("/login", async (req, res) => {
     const payload = {
       id: user._id,
       role: user.role,
-      name: user.name
+      name: user.name,
+      email: user.email
     };
 
     jwt.sign(
@@ -113,7 +115,9 @@ router.patch("/", auth, async (req, res) => {
 
     const payload = {
       id: user._id,
-      role: user.role
+      role: user.role,
+      name: user.name,
+      email: user.email
     };
 
     jwt.sign(
