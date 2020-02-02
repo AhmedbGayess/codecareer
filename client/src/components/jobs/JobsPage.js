@@ -10,9 +10,11 @@ const JobsPage = ({ getJobs, clearJobs, match, getOwnJobs }) => {
   const [search, setSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const companyJobs = match.path === "/my-jobs";
+
   useEffect(() => {
     clearJobs();
-    if (match.path === "/my-jobs") {
+    if (companyJobs) {
       getOwnJobs(0);
     } else {
       getJobs(0, searchQuery);
@@ -26,7 +28,7 @@ const JobsPage = ({ getJobs, clearJobs, match, getOwnJobs }) => {
   const submitSearch = (e) => {
     e.preventDefault();
     clearJobs();
-    if (match.path === "/my-jobs") {
+    if (companyJobs) {
       getOwnJobs(0);
     } else {
       getJobs(0, search);
@@ -36,7 +38,7 @@ const JobsPage = ({ getJobs, clearJobs, match, getOwnJobs }) => {
   };
 
   const searchJobs = () => {
-    if (match.path === "/my-jobs") {
+    if (companyJobs) {
       getOwnJobs(skip);
     } else {
       getJobs(skip, searchQuery);
@@ -46,13 +48,15 @@ const JobsPage = ({ getJobs, clearJobs, match, getOwnJobs }) => {
 
   return (
     <div className="container">
-      <SearchForm
-        onChange={setSearch}
-        value={search}
-        placeholder="Search a job by title, skills, location..."
-        title="a job"
-        onSubmit={submitSearch}
-      />
+      {!companyJobs && (
+        <SearchForm
+          onChange={setSearch}
+          value={search}
+          placeholder="Search a job by title, skills, location..."
+          title="a job"
+          onSubmit={submitSearch}
+        />
+      )}
       <JobsFeed fetchJobs={searchJobs} />
     </div>
   );
