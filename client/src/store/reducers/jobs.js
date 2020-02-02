@@ -1,8 +1,8 @@
 import { SET_JOB, SET_JOBS, SET_JOB_LOADING, CLEAR_JOBS } from "../types";
 
 const initialState = {
-  post: null,
-  posts: [],
+  job: null,
+  jobs: [],
   loading: false
 };
 

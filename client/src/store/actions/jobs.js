@@ -85,6 +85,10 @@ export const getOwnJobs = (skip) => async (dispatch) => {
   }
 };
 
+export const clearJobs = () => ({
+  type: CLEAR_JOBS
+});
+
 const setJobLoading = () => ({
   type: SET_JOB_LOADING
 });

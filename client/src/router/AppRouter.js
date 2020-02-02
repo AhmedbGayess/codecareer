@@ -12,6 +12,7 @@ import Home from "../components/home/Home";
 import PostPage from "../components/posts/PostPage";
 import Profiles from "../components/profiles/Profiles";
 import EditJob from "../components/edit-job/EditJob";
+import JobsPage from "../components/jobs/JobsPage";
 
 const AppRouter = () => (
   <Router>
@@ -26,6 +27,7 @@ const AppRouter = () => (
       <PrivateRoute path="/post/:id" exact component={PostPage} />
       <PrivateRoute path="/edit-user" exact component={Signup} />
       <PrivateRoute path="/developers" exact component={Profiles} />
+      <PrivateRoute path="/jobs" exact component={JobsPage} />
       <CompnayRoute path="/add-job" exact component={EditJob} />
       <CompnayRoute path="/edit-job/:id" exact component={EditJob} />
     </Switch>
