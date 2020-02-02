@@ -12,6 +12,9 @@ const Profiles = ({ getProfiles, profiles, clearProfiles }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    clearProfiles();
+    getProfiles(0, searchQuery);
+    setSkip(10);
     return () => {
       clearProfiles();
     };
