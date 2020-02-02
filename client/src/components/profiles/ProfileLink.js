@@ -9,7 +9,6 @@ const ProfileLink = ({ id, name, image, location, about }) => {
     <Link to={`/profile/${id}`} className="profile-link">
       <img
         src={image ? `/images/${image}` : avatar}
-        className=""
         alt="user"
         className="profile-link__image"
       />

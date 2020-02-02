@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import CompnayRoute from "./CompanyRoute";
 import Navbar from "../components/layout/Navbar";
 import Login from "../components/auth/Login";
 import Signup from "../components/auth/Signup";
@@ -10,6 +11,7 @@ import Profile from "../components/profile/Profile";
 import Home from "../components/home/Home";
 import PostPage from "../components/posts/PostPage";
 import Profiles from "../components/profiles/Profiles";
+import EditJob from "../components/edit-job/EditJob";
 
 const AppRouter = () => (
   <Router>
@@ -24,6 +26,7 @@ const AppRouter = () => (
       <PrivateRoute path="/post/:id" exact component={PostPage} />
       <PrivateRoute path="/edit-user" exact component={Signup} />
       <PrivateRoute path="/developers" exact component={Profiles} />
+      <CompnayRoute path="/edit-job" exact component={EditJob} />
     </Switch>
   </Router>
 );

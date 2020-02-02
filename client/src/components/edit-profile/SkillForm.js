@@ -7,7 +7,7 @@ const SkillForm = ({ skill, setSkill, addSkill }) => (
     <FormInput
       name="skill"
       label="Add a skill"
-      placeholder="Add your skills one by one"
+      placeholder="Add skills one by one"
       value={skill}
       onChange={setSkill}
     />
