@@ -111,7 +111,7 @@ router.get("/", auth, async (req, res) => {
     })
       .select("-applicants")
       .limit(10)
-      .skip(parseInt(req.params.skip));
+      .skip(parseInt(req.query.skip));
     res.send(jobs);
   } catch (err) {
     res.status(500).send(err.message);

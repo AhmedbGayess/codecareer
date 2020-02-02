@@ -60,9 +60,7 @@ export const deleteJob = (id, history) => async () => {
 export const getJobs = (skip, search) => async (dispatch) => {
   dispatch(setJobLoading());
   try {
-    const { data } = await axios.get(
-      `/api/jobs?skip=${skip}}&search=${search}`
-    );
+    const { data } = await axios.get(`/api/jobs?skip=${skip}&search=${search}`);
     dispatch({
       type: SET_JOBS,
       payload: data

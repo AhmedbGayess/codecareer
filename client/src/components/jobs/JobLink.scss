@@ -1,0 +1,10 @@
+.job-link {
+  display: block;
+  border: 1px solid #ccc;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  &__title {
+    font-size: 1.2rem;
+  }
+}

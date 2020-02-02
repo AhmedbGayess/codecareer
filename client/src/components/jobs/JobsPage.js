@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { getJobs, clearJobs } from "../../store/actions/jobs";
 import PropTypes from "prop-types";
 import SearchForm from "../common/SearchForm";
+import JobsFeed from "./JobsFeed";
 
-const JobsPage = ({ jobs, getJobs, clearJobs }) => {
+const JobsPage = ({ getJobs, clearJobs }) => {
   const [skip, setSkip] = useState(0);
   const [search, setSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
+    clearJobs();
     getJobs(0, searchQuery);
+    setSkip(10);
     return () => {
       clearJobs();
     };
@@ -39,19 +41,14 @@ const JobsPage = ({ jobs, getJobs, clearJobs }) => {
         title="a job"
         onSubmit={submitSearch}
       />
-      <InfiniteScroll dataLength={jobs.length} next={searchJobs} hasMore={true}>
-        {jobs.map((job) => (
-          <p key={job._id}>{job.title}</p>
-        ))}
-      </InfiniteScroll>
+      <JobsFeed fetchJobs={searchJobs} />
     </div>
   );
 };
 
-JobsPage.propTypes = {};
+JobsPage.propTypes = {
+  getJobs: PropTypes.func.isRequired,
+  clearJobs: PropTypes.func.isRequired
+};
 
-const mapStateToProps = (state) => ({
-  jobs: state.jobs.jobs
-});
-
-export default connect(mapStateToProps, { getJobs, clearJobs })(JobsPage);
+export default connect(null, { getJobs, clearJobs })(JobsPage);
