@@ -64,18 +64,21 @@ router.post("/apply/:id", auth, async (req, res) => {
     );
 
     if (applied) {
-      return res.send("Already applied");
+      const updatedApplicants = job.applicants.filter(
+        (applicant) => applicant.user.toString() !== req.user.id
+      );
+      job.applicants = updatedApplicants;
+    } else {
+      job.applicants.unshift({
+        user: req.user.id,
+        name: profile.user.name,
+        profilePicture: profile.profilePicture,
+        skills: profile.skills
+      });
     }
 
-    job.applicants.unshift({
-      user: req.user.id,
-      name: profile.user.name,
-      profilePicture: profile.profilePicture,
-      skills: profile.skills
-    });
-
     await job.save();
-    res.send(job);
+    res.send(job.applicants);
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -105,6 +108,21 @@ router.get("/", auth, async (req, res) => {
           location: new RegExp(`.*${searchQuery}.*`, "i")
         }
       ]
+    })
+      .select("-applicants")
+      .limit(10)
+      .skip(parseInt(req.params.skip));
+    res.send(jobs);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get own jobs
+router.get("/", auth, async (req, res) => {
+  try {
+    const jobs = await Job.find({
+      user: req.user.id
     })
       .select("-applicants")
       .limit(10)
