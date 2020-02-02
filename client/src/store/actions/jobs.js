@@ -3,8 +3,8 @@ import { SET_JOB, SET_JOBS, SET_JOB_LOADING, CLEAR_JOBS } from "../types";
 
 export const addJob = (jobData, history) => async (dispatch) => {
   try {
-    await axios.post("/api/jobs", jobData);
-    history.push("/home");
+    const { data } = await axios.post("/api/jobs", jobData);
+    history.push(`/job/${data._id}`);
   } catch (err) {
     console.log(err);
   }
@@ -19,7 +19,10 @@ export const getJob = (id) => async (dispatch) => {
       payload: data
     });
   } catch (err) {
-    console.log(err);
+    dispatch({
+      type: SET_JOB,
+      payload: {}
+    });
   }
 };
 
@@ -42,7 +45,7 @@ export const getOwnJob = (id) => async (dispatch) => {
 export const editJob = (id, jobData, history) => async () => {
   try {
     await axios.patch(`/api/jobs/${id}`, jobData);
-    history.push("/home");
+    history.push(`/job/${id}`);
   } catch (err) {
     console.log(err);
   }
@@ -51,7 +54,7 @@ export const editJob = (id, jobData, history) => async () => {
 export const deleteJob = (id, history) => async () => {
   try {
     await axios.delete(`/api/jobs/${id}`);
-    history.push("/home");
+    history.push("/my-jobs");
   } catch (err) {
     console.log(err);
   }
