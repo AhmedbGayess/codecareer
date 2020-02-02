@@ -13,24 +13,40 @@ export const addJob = (jobData, history) => async (dispatch) => {
 export const getJob = (id) => async (dispatch) => {
   dispatch(setJobLoading());
   try {
-    const {data} = await axios.get(`/api/jobs/${id}`);
+    const { data } = await axios.get(`/api/jobs/${id}`);
     dispatch({
       type: SET_JOB,
       payload: data
-    })
+    });
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
 
-export const editJob = (id, jobData, history) => {
+export const getOwnJob = (id) => async (dispatch) => {
+  dispatch(setJobLoading());
+  try {
+    const { data } = await axios.get(`/api/jobs/own-job/${id}`);
+    dispatch({
+      type: SET_JOB,
+      payload: data
+    });
+  } catch (err) {
+    dispatch({
+      type: SET_JOB,
+      payload: {}
+    });
+  }
+};
+
+export const editJob = (id, jobData, history) => async () => {
   try {
     await axios.patch(`/api/jobs/${id}`, jobData);
     history.push("/home");
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 const setJobLoading = () => ({
   type: SET_JOB_LOADING

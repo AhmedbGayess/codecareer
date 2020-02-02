@@ -119,7 +119,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // Get own jobs
-router.get("/", auth, async (req, res) => {
+router.get("/own-jobs", auth, async (req, res) => {
   try {
     const jobs = await Job.find({
       user: req.user.id
@@ -137,6 +137,19 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
+    if (!job) {
+      return res.status(404).send("No job found");
+    }
+    res.send(job);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+// Get own job by id
+router.get("/own-job/:id", auth, async (req, res) => {
+  try {
+    const job = await Job.findOne({ _id: req.params.id, user: req.user.id });
     if (!job) {
       return res.status(404).send("No job found");
     }

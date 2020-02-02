@@ -26,7 +26,8 @@ const AppRouter = () => (
       <PrivateRoute path="/post/:id" exact component={PostPage} />
       <PrivateRoute path="/edit-user" exact component={Signup} />
       <PrivateRoute path="/developers" exact component={Profiles} />
-      <CompnayRoute path="/edit-job" exact component={EditJob} />
+      <CompnayRoute path="/add-job" exact component={EditJob} />
+      <CompnayRoute path="/edit-job/:id" exact component={EditJob} />
     </Switch>
   </Router>
 );

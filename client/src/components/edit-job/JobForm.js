@@ -6,12 +6,18 @@ import SkillForm from "../edit-profile/SkillForm";
 import SkillList from "../edit-profile/SkillList";
 import "./JobForm.scss";
 
-const JobForm = (props) => {
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
+const JobForm = ({
+  onSubmit,
+  fetchedTitle,
+  fetchedLocation,
+  fetchedDescription,
+  fetchedSkills
+}) => {
+  const [title, setTitle] = useState(fetchedTitle || "");
+  const [location, setLocation] = useState(fetchedLocation || "");
+  const [description, setDescription] = useState(fetchedDescription || "");
   const [skill, setSkill] = useState("");
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(fetchedSkills || []);
   const [titleError, setTitleError] = useState("");
   const [locationError, setLocationError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
@@ -54,13 +60,13 @@ const JobForm = (props) => {
     return isFormValid;
   };
 
-  const onSubmit = () => {
+  const submit = () => {
     const isFormValid = handleValidation();
     if (!isFormValid) {
       return;
     }
 
-    console.log("shit");
+    onSubmit({ title, location, description, skills });
   };
 
   return (
@@ -89,18 +95,20 @@ const JobForm = (props) => {
           value={description}
           onChange={setDescription}
           rows="6"
-          error={locationError}
+          error={descriptionError}
         />
       </form>
       <SkillForm skill={skill} setSkill={setSkill} addSkill={addSkill} />
       <SkillList skills={skills} deleteSkill={deleteSkill} />
-      <button className="btn btn--primary" onClick={onSubmit}>
+      <button className="btn btn--primary" onClick={submit}>
         Submit
       </button>
     </div>
   );
 };
 
-JobForm.propTypes = {};
+JobForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default JobForm;
