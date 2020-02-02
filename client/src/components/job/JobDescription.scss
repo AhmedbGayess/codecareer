@@ -1,0 +1,20 @@
+.job-description {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+
+  &__company {
+    color: #9c2ec7;
+    font-weight: bold;
+  }
+
+  &__edit {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}

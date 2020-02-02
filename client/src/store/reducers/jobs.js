@@ -1,4 +1,10 @@
-import { SET_JOB, SET_JOBS, SET_JOB_LOADING, CLEAR_JOBS } from "../types";
+import {
+  SET_JOB,
+  SET_JOBS,
+  SET_JOB_LOADING,
+  CLEAR_JOBS,
+  APPLY_TO_JOB
+} from "../types";
 
 const initialState = {
   job: null,
@@ -29,6 +35,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         jobs: []
+      };
+    case APPLY_TO_JOB:
+      return {
+        ...state,
+        job: {
+          ...state.job,
+          applicants: action.payload
+        }
       };
     default:
       return state;

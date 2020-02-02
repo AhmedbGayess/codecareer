@@ -41,6 +41,16 @@ const JobSchema = new mongoose.Schema(
         skills: {
           type: [String],
           required: true
+        },
+        location: {
+          type: String,
+          required: true
+        },
+        profilePicture: {
+          type: String
+        },
+        about: {
+          type: String
         }
       }
     ]

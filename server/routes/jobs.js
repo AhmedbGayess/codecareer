@@ -53,7 +53,7 @@ router.post("/apply/:id", auth, async (req, res) => {
 
     const profile = await Profile.findOne({ user: req.user.id })
       .populate("user", ["name"])
-      .select("-experience -about -education -github -website");
+      .select("-experience -education -github -website");
 
     if (!profile) {
       return res.status(401).send("Profile needed to post a job");
@@ -73,7 +73,9 @@ router.post("/apply/:id", auth, async (req, res) => {
         user: req.user.id,
         name: profile.user.name,
         profilePicture: profile.profilePicture,
-        skills: profile.skills
+        location: profile.location,
+        skills: profile.skills,
+        about: profile.about
       });
     }
 

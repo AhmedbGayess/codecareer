@@ -6,7 +6,6 @@ import { logout } from "../../store/actions/auth";
 import "./Navbar.scss";
 
 const Navbar = ({ history, isAuthenticated, logout, isCompany }) => {
-  console.log(isCompany);
   const logoutUser = () => {
     logout();
     history.push("/");

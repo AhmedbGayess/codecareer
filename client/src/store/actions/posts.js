@@ -81,7 +81,9 @@ export const likePost = (id) => async (dispatch) => {
       type: LIKE_POST,
       payload: { id, likes: data }
     });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const addComment = (id, text) => async (dispatch) => {

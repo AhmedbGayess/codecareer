@@ -15,6 +15,7 @@ import EditJob from "../components/edit-job/EditJob";
 import JobsPage from "../components/jobs/JobsPage";
 import Footer from "../components/layout/Footer";
 import NotFound from "../components/not-found/NotFound";
+import Job from "../components/job/Job";
 
 const AppRouter = () => (
   <Router>
@@ -33,6 +34,7 @@ const AppRouter = () => (
       <CompnayRoute path="/add-job" exact component={EditJob} />
       <CompnayRoute path="/edit-job/:id" exact component={EditJob} />
       <CompnayRoute path="/my-jobs" exact component={JobsPage} />
+      <PrivateRoute path="/job/:id" exact component={Job} />
       <Route component={NotFound} />
     </Switch>
     <Route component={Footer} />

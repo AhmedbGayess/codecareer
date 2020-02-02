@@ -1,5 +1,11 @@
 import axios from "axios";
-import { SET_JOB, SET_JOBS, SET_JOB_LOADING, CLEAR_JOBS } from "../types";
+import {
+  SET_JOB,
+  SET_JOBS,
+  SET_JOB_LOADING,
+  CLEAR_JOBS,
+  APPLY_TO_JOB
+} from "../types";
 
 export const addJob = (jobData, history) => async (dispatch) => {
   try {
@@ -79,6 +85,18 @@ export const getOwnJobs = (skip) => async (dispatch) => {
     const { data } = await axios.get(`/api/jobs/own-jobs?skip=${skip}`);
     dispatch({
       type: SET_JOBS,
+      payload: data
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const applyToJob = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`/api/jobs/apply/${id}`);
+    dispatch({
+      type: APPLY_TO_JOB,
       payload: data
     });
   } catch (err) {
