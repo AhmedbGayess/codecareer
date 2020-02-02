@@ -13,3 +13,7 @@ export const LIKE_POST = "LIKE_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_POSTS = "CLEAR_POSTS";
+export const SET_JOB = "SET_JOB";
+export const SET_JOBS = "SET_JOBS";
+export const SET_JOB_LOADING = "SET_JOB_LOADING";
+export const CLEAR_JOBS = "CLEAR_JOBS";
