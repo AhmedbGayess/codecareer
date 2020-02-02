@@ -13,7 +13,7 @@ import PostPage from "../components/posts/PostPage";
 import Profiles from "../components/profiles/Profiles";
 import EditJob from "../components/edit-job/EditJob";
 import JobsPage from "../components/jobs/JobsPage";
-import JobsFeed from "../components/jobs/JobsFeed";
+import Footer from "../components/layout/Footer";
 
 const AppRouter = () => (
   <Router>
@@ -33,6 +33,7 @@ const AppRouter = () => (
       <CompnayRoute path="/edit-job/:id" exact component={EditJob} />
       <CompnayRoute path="/my-jobs" exact component={JobsPage} />
     </Switch>
+    <Route component={Footer} />
   </Router>
 );
 

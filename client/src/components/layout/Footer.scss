@@ -1,0 +1,15 @@
+.footer {
+  text-align: center;
+  background: #24292e;
+  padding: 3rem;
+  margin-top: 3rem;
+
+  &__copyright {
+    margin-bottom: 1rem;
+    color: #ccc;
+  }
+
+  &__created {
+    color: #a028cf;
+  }
+}
