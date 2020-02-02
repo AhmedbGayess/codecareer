@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { editProfile, getOwnProfile } from "../../store/actions/profiles";
+import {
+  editProfile,
+  getOwnProfile,
+  deleteProfile
+} from "../../store/actions/profiles";
 import "./EditProfile.scss";
 import EducationForm from "./EducationForm";
 import ExperienceForm from "./ExperienceForm";
@@ -12,14 +16,15 @@ import ProfileImageInput from "./ProfileImageInput";
 import ProfilePicture from "./ProfilePicture";
 import SkillForm from "./SkillForm";
 import SkillList from "./SkillList";
-import DeleteProfile from "./DeleteProfile";
+import Delete from "../common/Delete";
 
 const EditProfile = ({
   editProfile,
   history,
   getOwnProfile,
   profile,
-  role
+  role,
+  deleteProfile
 }) => {
   const [about, setAbout] = useState("");
   const [location, setLocation] = useState("");
@@ -214,7 +219,9 @@ const EditProfile = ({
             Save profile
           </button>
         </>
-        {profile && Object.keys(profile).length > 0 && <DeleteProfile />}
+        {profile && Object.keys(profile).length > 0 && (
+          <Delete text="Delete your profile" remove={deleteProfile} />
+        )}
       </div>
     </div>
   );
@@ -223,6 +230,7 @@ const EditProfile = ({
 EditProfile.propTypes = {
   editProfile: PropTypes.func.isRequired,
   getOwnProfile: PropTypes.func.isRequired,
+  deleteProfile: PropTypes.func.isRequired,
   profile: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.instanceOf(null).isRequired
@@ -235,6 +243,8 @@ const mapStateToProps = (state) => ({
   role: state.auth.user.role
 });
 
-export default connect(mapStateToProps, { editProfile, getOwnProfile })(
-  EditProfile
-);
+export default connect(mapStateToProps, {
+  editProfile,
+  getOwnProfile,
+  deleteProfile
+})(EditProfile);
