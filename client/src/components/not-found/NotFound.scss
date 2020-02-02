@@ -1,0 +1,18 @@
+.not-found {
+  padding: 5rem 0 15rem 0;
+  margin-bottom: 6rem;
+  text-align: center;
+
+  &__title {
+    font-size: 7rem;
+  }
+
+  &__text {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  &__link {
+    color: #f76f7f;
+  }
+}
