@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import { logout } from "../../store/actions/auth";
 import "./Navbar.scss";
 
-const Navbar = ({ history, isAuthenticated, logout }) => {
+const Navbar = ({ history, isAuthenticated, logout, isCompany }) => {
+  console.log(isCompany);
   const logoutUser = () => {
     logout();
     history.push("/");
@@ -52,6 +53,28 @@ const Navbar = ({ history, isAuthenticated, logout }) => {
                 Jobs
               </NavLink>
             </li>
+            {isCompany && (
+              <>
+                <li className="nav__list-item">
+                  <NavLink
+                    to="/my-jobs"
+                    className="nav__list-link"
+                    activeClassName="nav__list-link--active"
+                  >
+                    Our Jobs
+                  </NavLink>
+                </li>
+                <li className="nav__list-item">
+                  <NavLink
+                    to="/add-job"
+                    className="nav__list-link"
+                    activeClassName="nav__list-link--active"
+                  >
+                    Add Job
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li className="nav__list-item">
               <NavLink
                 to="/developers"
@@ -84,11 +107,13 @@ const Navbar = ({ history, isAuthenticated, logout }) => {
 
 Navbar.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  isCompany: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  isCompany: state.auth.user.role === "company"
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

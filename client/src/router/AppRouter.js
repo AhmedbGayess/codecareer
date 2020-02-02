@@ -13,6 +13,7 @@ import PostPage from "../components/posts/PostPage";
 import Profiles from "../components/profiles/Profiles";
 import EditJob from "../components/edit-job/EditJob";
 import JobsPage from "../components/jobs/JobsPage";
+import JobsFeed from "../components/jobs/JobsFeed";
 
 const AppRouter = () => (
   <Router>
@@ -30,6 +31,7 @@ const AppRouter = () => (
       <PrivateRoute path="/jobs" exact component={JobsPage} />
       <CompnayRoute path="/add-job" exact component={EditJob} />
       <CompnayRoute path="/edit-job/:id" exact component={EditJob} />
+      <CompnayRoute path="/my-jobs" exact component={JobsPage} />
     </Switch>
   </Router>
 );

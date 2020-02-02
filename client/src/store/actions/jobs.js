@@ -76,7 +76,7 @@ export const getJobs = (skip, search) => async (dispatch) => {
 export const getOwnJobs = (skip) => async (dispatch) => {
   dispatch(setJobLoading());
   try {
-    const { data } = await axios.get(`/api/jobs/own-jobs?skip=${skip}}`);
+    const { data } = await axios.get(`/api/jobs/own-jobs?skip=${skip}`);
     dispatch({
       type: SET_JOBS,
       payload: data
