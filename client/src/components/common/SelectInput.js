@@ -17,7 +17,7 @@ const SelectInput = ({ name, label, choices, error, onChange, value }) => {
         id={name}
         name={name}
         className="input-field"
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         value={value}
       >
         {options}
