@@ -58,10 +58,10 @@ const EditJob = ({
       <h1 className="edit-job__title">{id ? "Edit Job" : "Post a new Job"}</h1>
       <JobForm
         onSubmit={onSubmit}
-        fetchedTitle={job && job.title}
-        fetchedLocation={job && job.location}
-        fetchedDescription={job && job.description}
-        fetchedSkills={job && job.skills}
+        fetchedTitle={id && job && job.title}
+        fetchedLocation={id && job && job.location}
+        fetchedDescription={id && job && job.description}
+        fetchedSkills={id && job && job.skills}
       />
       {id && <Delete text="Delete job" remove={removeJob} />}
     </div>

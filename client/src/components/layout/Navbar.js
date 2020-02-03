@@ -80,7 +80,7 @@ const Navbar = ({ history, isAuthenticated, logout, isCompany }) => {
                 className="nav__list-link"
                 activeClassName="nav__list-link--active"
               >
-                Developers
+                Profiles
               </NavLink>
             </li>
             <li className="nav__list-item">

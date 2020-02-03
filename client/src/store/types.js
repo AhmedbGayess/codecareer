@@ -18,3 +18,4 @@ export const SET_JOBS = "SET_JOBS";
 export const SET_JOB_LOADING = "SET_JOB_LOADING";
 export const CLEAR_JOBS = "CLEAR_JOBS";
 export const APPLY_TO_JOB = "APPLY_TO_JOB";
+export const CLEAR_JOB = "CLEAR_JOB";

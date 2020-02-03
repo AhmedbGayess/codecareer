@@ -38,7 +38,7 @@ const Profiles = ({ getProfiles, profiles, clearProfiles }) => {
       <SearchForm
         onChange={setSearch}
         value={search}
-        placeholder="Search a developer by name, skills, location..."
+        placeholder="Search a profile by name, skills, location..."
         title="a developer"
         onSubmit={submitSearch}
       />
