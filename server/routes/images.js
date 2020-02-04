@@ -6,6 +6,7 @@ const Jimp = require("jimp");
 const uuidv4 = require("uuid");
 const Image = require("../models/Image");
 const Profile = require("../models/Profile");
+const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 
 const router = new express.Router();
@@ -58,6 +59,13 @@ router.post("/", auth, (req, res) => {
             user: req.user.id
           });
           savedImage.save();
+          const posts = await Post.find({ user: req.user.id });
+          if (posts) {
+            posts.forEach(async (post) => {
+              post.profilePicture = image;
+              await post.save();
+            });
+          }
           res.send(savedImage);
         });
       }
@@ -85,6 +93,12 @@ router.delete("/:image", auth, async (req, res) => {
     fs.unlinkSync(`./uploads/${req.params.image}`);
     profile.profilePicture = "";
     profile.save();
+
+    const posts = await Post.find({ user: req.user.id });
+    posts.forEach(async (post) => {
+      post.profilePicture = "";
+      await post.save();
+    });
     res.send("Image deleted");
   } catch (err) {
     res.send(err.message);
