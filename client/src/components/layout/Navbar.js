@@ -24,6 +24,7 @@ const Navbar = ({ history, isAuthenticated, logout, isCompany }) => {
             <li className="nav__list-item">
               <NavLink
                 to="/"
+                exact
                 className="nav__list-link"
                 activeClassName="nav__list-link--active"
               >

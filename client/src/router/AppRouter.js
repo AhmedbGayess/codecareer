@@ -37,7 +37,24 @@ const AppRouter = () => (
       <PrivateRoute path="/job/:id" exact component={Job} />
       <Route component={NotFound} />
     </Switch>
-    <Route component={Footer} />
+    <Route
+      path={[
+        "/home",
+        "/register",
+        "/edit-profile",
+        "/me",
+        "/profile/:id",
+        "/post/:id",
+        "/edit-user",
+        "/developers",
+        "/jobs",
+        "/add-job",
+        "/edit-job/:id",
+        "/my-jobs",
+        "/job/:id"
+      ]}
+      component={Footer}
+    />
   </Router>
 );
 
