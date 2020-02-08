@@ -48,7 +48,7 @@ const ProfileCard = ({
           )}
           {website && (
             <a
-              href={website}
+              href={`http://${website}`}
               target="_blank"
               rel="noopener noreferrer"
               className="profile-card__link"
