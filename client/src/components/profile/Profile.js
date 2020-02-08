@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import { getOwnProfile, getProfile } from "../../store/actions/profiles";
@@ -9,6 +9,7 @@ import Loader from "../common/Loader";
 import ProfileCard from "./ProfileCard";
 import DevEdExpList from "./DevEdExpList";
 import PostsFeed from "../posts/PostsFeed";
+import ProfileNeeded from "./ProfileNeeded";
 
 const Profile = ({
   profile,
@@ -26,6 +27,8 @@ const Profile = ({
   const id = match.path === "/me" ? userId : match.params.id;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (match.path === "/me") {
       getOwnProfile(id);
     } else {
@@ -48,7 +51,7 @@ const Profile = ({
   }
 
   if (Object.keys(profile).length === 0 && match.path === "/me") {
-    return <Redirect to="/edit-profile" />;
+    return <ProfileNeeded />;
   } else if (Object.keys(profile).length === 0) {
     return <h1 className="no-profile">No profile found</h1>;
   }

@@ -9,6 +9,7 @@ import JobSkills from "./JobSkills";
 import JobAbout from "./JobAbout";
 import ProfileLink from "../profiles/ProfileLink";
 import "./Job.scss";
+import ProfileNeeded from "../profile/ProfileNeeded";
 
 const Job = ({ jobs, getJob, match, userId, getOwnProfile, profiles }) => {
   useEffect(() => {
@@ -25,6 +26,10 @@ const Job = ({ jobs, getJob, match, userId, getOwnProfile, profiles }) => {
 
   if (Object.keys(job).length === 0) {
     return <p>No job found</p>;
+  }
+
+  if (Object.keys(profile).length === 0) {
+    return <ProfileNeeded />;
   }
 
   const {

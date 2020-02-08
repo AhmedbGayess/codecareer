@@ -33,12 +33,6 @@ const SignupForm = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (editPage) {
-      const { email, name } = user;
-    }
-  });
-
   const handleValidation = () => {
     let isFormValid = true;
     const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;

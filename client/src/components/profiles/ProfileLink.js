@@ -1,12 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import avatar from "../../images/avatar.png";
 import "./ProfileLink.scss";
 
-const ProfileLink = ({ id, name, image, location, about }) => {
+const ProfileLink = ({ id, name, image, location, about, userId }) => {
+  const link = id === userId ? "/me" : `/profile/${id}`;
   return (
-    <Link to={`/profile/${id}`} className="profile-link">
+    <Link to={link} className="profile-link">
       <img
         src={image ? `/images/${image}` : avatar}
         alt="user"
@@ -29,4 +31,8 @@ ProfileLink.propTypes = {
   about: PropTypes.string.isRequired
 };
 
-export default ProfileLink;
+const mapStateToProps = (state) => ({
+  userId: state.auth.user.id
+});
+
+export default connect(mapStateToProps)(ProfileLink);

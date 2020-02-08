@@ -40,13 +40,19 @@ const ProfileCard = ({
             <a
               href={`https://github.com/${github}`}
               target="_blank"
+              rel="noopener noreferrer"
               className="profile-card__link"
             >
               Github Profile
             </a>
           )}
           {website && (
-            <a href={website} target="_blank" className="profile-card__link">
+            <a
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="profile-card__link"
+            >
               {website}
             </a>
           )}
