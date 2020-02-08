@@ -9,12 +9,21 @@ const JobSkills = ({ skills, userSkills }) => {
       .join("")
       .toLowerCase()
       .includes(skill.toLowerCase()) ? (
-      <li key={uuidv4()}>{skill}&#10003;</li>
+      <li key={uuidv4()} className="job-skills__item job-skills__item--checked">
+        &#10003; {skill}
+      </li>
     ) : (
-      <li key={uuidv4()}>{skill}</li>
+      <li key={uuidv4()} className="job-skills__item">
+        {skill}
+      </li>
     )
   );
-  return <ul className="job-skills">{skillsItems}</ul>;
+  return (
+    <div className="job-skills">
+      <h3>Required Skills</h3>
+      <ul className="job-skills__list">{skillsItems}</ul>
+    </div>
+  );
 };
 
 JobSkills.propTypes = {

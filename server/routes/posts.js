@@ -115,7 +115,6 @@ router.patch("/like/:id", auth, async (req, res) => {
 
 // Add comment
 router.post("/comment/:id", auth, async (req, res) => {
-  console.log("hello");
   try {
     const profile = await Profile.findOne({
       user: req.user.id
@@ -142,9 +141,9 @@ router.post("/comment/:id", auth, async (req, res) => {
       text: req.body.text
     };
 
-    post.comments.unshift(comment);
+    post.comments.push(comment);
     await post.save();
-    res.send(post.comments[0]);
+    res.send(post.comments[post.comments.length - 1]);
   } catch (err) {
     res.status(500).send(err.message);
   }

@@ -19,6 +19,16 @@ const Navbar = ({ history, isAuthenticated, logout, isCompany }) => {
         </NavLink>
       </h1>
       <ul className="nav__list">
+        <li className="nav__list-item">
+          <NavLink
+            to="/home"
+            exact
+            className="nav__list-link"
+            activeClassName="nav__list-link--active"
+          >
+            Home
+          </NavLink>
+        </li>
         {!isAuthenticated && (
           <>
             <li className="nav__list-item">

@@ -61,7 +61,7 @@ const Job = ({ jobs, getJob, match, userId, getOwnProfile, profiles }) => {
         <JobSkills skills={skills} userSkills={profile.skills} />
       </div>
       <JobAbout description={description} />
-      {user === userId && (
+      {user === userId && applicants.length > 0 && (
         <>
           <h1>Applicants</h1>
           {applicants.map((applicant) => (

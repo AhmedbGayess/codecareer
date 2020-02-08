@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
         ...state,
         post: {
           ...state.post,
-          comments: [action.payload, ...state.post.comments]
+          comments: [...state.post.comments, action.payload]
         }
       };
     case DELETE_COMMENT:
