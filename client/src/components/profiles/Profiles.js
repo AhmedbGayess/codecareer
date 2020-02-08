@@ -38,8 +38,8 @@ const Profiles = ({ getProfiles, profiles, clearProfiles }) => {
       <SearchForm
         onChange={setSearch}
         value={search}
-        placeholder="Search a profile by name, skills, location..."
-        title="a developer"
+        placeholder="Search developers and companies profiles"
+        title="a developer or a company"
         onSubmit={submitSearch}
       />
       <InfiniteScroll

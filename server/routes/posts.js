@@ -55,6 +55,7 @@ router.get("/", auth, async (req, res) => {
   try {
     const posts = await Post.find()
       .limit(10)
+      .sort({ createdAt: -1 })
       .skip(parseInt(req.query.skip));
     res.send(posts);
   } catch (err) {

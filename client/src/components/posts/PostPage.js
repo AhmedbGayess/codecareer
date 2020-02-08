@@ -43,7 +43,7 @@ const PostPage = ({
     deleteComment(match.params.id, postId);
   };
 
-  const { user, name, profilePicture, text, comments } = post;
+  const { user, name, profilePicture, text, comments, createdAt } = post;
   return (
     <div className="container">
       <Post
@@ -52,20 +52,26 @@ const PostPage = ({
         text={text}
         remove={removePost}
         user={user}
+        date={createdAt}
       />
       <PostForm title="Add Comment" submit={postComment} />
-      <h1>Comments</h1>
-      {comments.map((comment) => (
-        <Post
-          key={comment._id}
-          name={comment.name}
-          image={comment.profilePicture}
-          text={comment.text}
-          remove={removeComment}
-          id={comment._id}
-          user={comment.user}
-        />
-      ))}
+      {comments.length > 0 && (
+        <>
+          <h1>Comments</h1>
+          {comments.map((comment) => (
+            <Post
+              key={comment._id}
+              name={comment.name}
+              image={comment.profilePicture}
+              text={comment.text}
+              remove={removeComment}
+              id={comment._id}
+              user={comment.user}
+              date={comment.date}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 };
