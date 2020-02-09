@@ -1,0 +1,14 @@
+.no-post {
+  margin: 2rem auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 3rem 0;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__link {
+    color: #f76f7f;
+  }
+}
