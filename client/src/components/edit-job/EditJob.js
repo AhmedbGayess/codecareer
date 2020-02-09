@@ -7,10 +7,12 @@ import {
   editJob,
   deleteJob
 } from "../../store/actions/jobs";
+import { getOwnProfile } from "../../store/actions/profiles";
 import JobForm from "./JobForm";
 import Loader from "../common/Loader";
 import "./EditJob.scss";
 import Delete from "../common/Delete";
+import ProfileNeeded from "../profile/ProfileNeeded";
 
 const EditJob = ({
   history,
@@ -19,11 +21,14 @@ const EditJob = ({
   getOwnJob,
   match,
   jobs,
-  deleteJob
+  deleteJob,
+  getOwnProfile,
+  profile
 }) => {
   const id = match.params.id;
 
   useEffect(() => {
+    getOwnProfile();
     if (id) {
       getOwnJob(id);
     }
@@ -53,6 +58,10 @@ const EditJob = ({
     }
   }
 
+  if (profile && Object.keys(profile).length === 0) {
+    return <ProfileNeeded />;
+  }
+
   return (
     <div className="container edit-job">
       <h1 className="edit-job__title">{id ? "Edit Job" : "Post a new Job"}</h1>
@@ -80,12 +89,14 @@ EditJob.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  jobs: state.jobs
+  jobs: state.jobs,
+  profile: state.profiles.profile
 });
 
 export default connect(mapStateToProps, {
   getOwnJob,
   addJob,
   editJob,
-  deleteJob
+  deleteJob,
+  getOwnProfile
 })(EditJob);
